@@ -6,35 +6,41 @@ import FormControl from 'react-bootstrap/FormControl'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 const Room = () => {
     return (
-        <Container>
-            <Row>
-                <Col>
-                    <InputGroup>
-                        <InputGroup.Text id="inputGroup-sizing-default">Длина, м</InputGroup.Text>
-                        <FormControl aria-label="Default" aria-describedby="inputGroup-sizing-default" />
-                    </InputGroup>
-                </Col>
-                <Col>
-                <InputGroup>
-                        <InputGroup.Text id="inputGroup-sizing-default">Длина 2, м</InputGroup.Text>
-                        <FormControl aria-label="Default" aria-describedby="inputGroup-sizing-default" />
-                    </InputGroup>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <InputGroup>
-                        <InputGroup.Text id="inputGroup-sizing-default">Ширина, м</InputGroup.Text>
-                        <FormControl aria-label="Default" aria-describedby="inputGroup-sizing-default" />
-                    </InputGroup>
-                </Col>
-            </Row>
-        </Container>
+        <>
+            <InputGroup>
+                <InputGroup.Text>Длина, м</InputGroup.Text>
+                <FormControl/>
+            </InputGroup>
+            <br />
+            <InputGroup>
+                <InputGroup.Text>Ширина, м</InputGroup.Text>
+                <FormControl/>
+            </InputGroup>
+            <br />
+            <Button variant='secondary' className='mb-3'>Вычислить размеры</Button>
+            <br />
+            <label className='fs-5'>Площадь, м2</label>
+            <br />
+            <Dropdown className='py-4'>
+                <Dropdown.Toggle variant='secondary'>
+                    PcPvPp
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                    <Dropdown.Item>10-30-50</Dropdown.Item>
+                    <Dropdown.Item>30-50-50</Dropdown.Item>
+                    <Dropdown.Item>30-50-70</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+            <InputGroup>
+                <InputGroup.Text>hp, м</InputGroup.Text>
+                <FormControl/>
+            </InputGroup>
 
-
+        </>
     )
 }
 
