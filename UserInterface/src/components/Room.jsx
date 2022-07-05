@@ -13,33 +13,33 @@ const Room = () => {
         <>
             <InputGroup>
                 <InputGroup.Text>Длина, м</InputGroup.Text>
-                <FormControl/>
+                <FormControl />
             </InputGroup>
             <br />
             <InputGroup>
                 <InputGroup.Text>Ширина, м</InputGroup.Text>
-                <FormControl/>
+                <FormControl />
             </InputGroup>
             <br />
             <Button variant='secondary' className='mb-3'>Вычислить размеры</Button>
             <br />
             <label className='fs-5'>Площадь, м2</label>
             <br />
-            <Dropdown className='py-4'>
-                <Dropdown.Toggle variant='secondary'>
-                    PcPvPp
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                    <Dropdown.Item>10-30-50</Dropdown.Item>
-                    <Dropdown.Item>30-50-50</Dropdown.Item>
-                    <Dropdown.Item>30-50-70</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
+            <Form.Select className='my-3'>
+                <option>РпРсРр</option>
+                <option>10-30-30</option>
+                <option>30-50-50</option>
+                <option>30-50-70</option>
+            </Form.Select>
             <InputGroup>
                 <InputGroup.Text>hp, м</InputGroup.Text>
-                <FormControl/>
+                <FormControl />
             </InputGroup>
-
+            <br />
+            <InputGroup>
+                <InputGroup.Text>Кз</InputGroup.Text>
+                <FormControl />
+            </InputGroup>
         </>
     )
 }
