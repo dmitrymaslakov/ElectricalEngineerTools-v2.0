@@ -17,9 +17,70 @@ const CustomToggle = ({ children, eventKey }) => {
     )
 }
 
+let luminaireData = [
+    {
+        id: '0', dataType: {
+            type: 'Производитель',
+            namesType: ['SVS-Lighting', 'Lighting Technologies', 'ЗАО Белинтегра']
+        }
+    },
+    {
+        id: '1', dataType: {
+            type: 'Форма',
+            namesType: ['Прямоугольный', 'Квадрат']
+        }
+    },
+    {
+        id: '2', dataType: {
+            type: 'Способ монтажа',
+            namesType: ['Потолочный', 'Встраиваемый в Armstrong', 'Встраиваемый в гипсокартон', 'Подвесной']
+        }
+    },
+    {
+        id: '3', dataType: {
+            type: 'Источник света',
+            namesType: ['Светодиодный модуль', 'Светодиодная лампа', 'Люминесцентная лампа', 'Лампа накаливания']
+        }
+    },
+    {
+        id: '4', dataType: {
+            type: 'Количество ламп в светильнике',
+            namesType: [1, 2, 3, 4]
+        }
+    },
+    {
+        id: '5', dataType: {
+            type: 'Климатическое исполнение',
+            namesType: ['УХЛ1', 'УХЛ2', 'УХЛ4', 'УХЛ5']
+        }
+    }
+    ,
+    {
+        id: '6', dataType: {
+            type: 'Остальные параметры',
+            namesType: ['Пылевлагозащищенный', 'Пожаробезопасный', 'Взрывобезопасный', 'БАП']
+        }
+    }
+]
+
+let cards = luminaireData.map(luminaire =>
+    <Card>
+        <Card.Header>
+            <CustomToggle eventKey={luminaire.id}>{luminaire.dataType.type}</CustomToggle>
+        </Card.Header>
+        <Accordion.Collapse eventKey={luminaire.id}>
+            <Card.Body>
+                <Form>
+                    {luminaire.dataType.namesType.map(name => <Form.Check type='checkbox' label={name} />)}
+                </Form>
+            </Card.Body>
+        </Accordion.Collapse>
+    </Card>
+)
+
 function MydModalWithGrid(props) {
     return (
-        <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
+        <Modal {...props} aria-labelledby="contained-modal-title-vcenter" fullscreen='true'>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Выбери светильник
@@ -29,33 +90,8 @@ function MydModalWithGrid(props) {
                 <Container>
                     <Row>
                         <Col xs={12} md={8}>
-                            <Accordion defaultActiveKey={['0', '1']} alwaysOpen>
-                                <Card>
-                                    <Card.Header>
-                                        <CustomToggle eventKey='0'>Производитель</CustomToggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey='0'>
-                                        <Card.Body>
-                                            <Form>
-                                                <Form.Check type='checkbox' label='SVS-Lighting' />
-                                                <Form.Check type='checkbox' label='Lighting Technologies' />
-                                            </Form>
-                                        </Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
-                                <Card>
-                                    <Card.Header>
-                                        <CustomToggle eventKey='1'>Форма</CustomToggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey='1'>
-                                        <Card.Body>
-                                            <Form>
-                                                <Form.Check type='checkbox' label='Прямоугольный' />
-                                                <Form.Check type='checkbox' label='Квадрат' />
-                                            </Form>
-                                        </Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
+                            <Accordion defaultActiveKey={['0', '1', '2', '3', '4', '5', '6']} alwaysOpen>
+                                {cards}
                             </Accordion>
                         </Col>
                         <Col xs={6} md={4}>
