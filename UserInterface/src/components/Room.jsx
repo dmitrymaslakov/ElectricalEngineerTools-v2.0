@@ -27,9 +27,9 @@ const Room = () => {
             <br />
             <Form.Select className='my-3'>
                 <option>РпРсРр</option>
-                <option>10-30-30</option>
-                <option>30-50-50</option>
-                <option>30-50-70</option>
+                <option value='10-30-30'>10-30-30</option>
+                <option value='30-50-50'>30-50-50</option>
+                <option value='30-50-70'>30-50-70</option>
             </Form.Select>
             <InputGroup>
                 <InputGroup.Text>hp, м</InputGroup.Text>

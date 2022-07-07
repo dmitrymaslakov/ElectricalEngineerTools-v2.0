@@ -5,7 +5,17 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import Accordion from 'react-bootstrap/Accordion'
+import { useAccordionButton } from 'react-bootstrap/AccordionButton'
 import Form from 'react-bootstrap/Form'
+import Card from 'react-bootstrap/Card'
+
+const CustomToggle = ({ children, eventKey }) => {
+    const decoratedOnClick = useAccordionButton(eventKey)
+
+    return (
+        <label onClick={decoratedOnClick}>{children}</label>
+    )
+}
 
 function MydModalWithGrid(props) {
     return (
@@ -20,25 +30,32 @@ function MydModalWithGrid(props) {
                     <Row>
                         <Col xs={12} md={8}>
                             <Accordion defaultActiveKey={['0', '1']} alwaysOpen>
-                                <Accordion.Item eventKey="0"y
-                                >
-                                    <Accordion.Header>Производитель</Accordion.Header>
-                                    <Accordion.Body>
-                                        <Form>
-                                            <Form.Check type='checkbox' label='SVS-Lighting' />
-                                            <Form.Check type='checkbox' label='Lighting Technologies' />
-                                        </Form>
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                                <Accordion.Item eventKey="1">
-                                    <Accordion.Header>Форма</Accordion.Header>
-                                    <Accordion.Body>
-                                        <Form>
-                                            <Form.Check type='checkbox' label='Прямоугольный' />
-                                            <Form.Check type='checkbox' label='Квадратный' />
-                                        </Form>
-                                    </Accordion.Body>
-                                </Accordion.Item>
+                                <Card>
+                                    <Card.Header>
+                                        <CustomToggle eventKey='0'>Производитель</CustomToggle>
+                                    </Card.Header>
+                                    <Accordion.Collapse eventKey='0'>
+                                        <Card.Body>
+                                            <Form>
+                                                <Form.Check type='checkbox' label='SVS-Lighting' />
+                                                <Form.Check type='checkbox' label='Lighting Technologies' />
+                                            </Form>
+                                        </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
+                                <Card>
+                                    <Card.Header>
+                                        <CustomToggle eventKey='1'>Форма</CustomToggle>
+                                    </Card.Header>
+                                    <Accordion.Collapse eventKey='1'>
+                                        <Card.Body>
+                                            <Form>
+                                                <Form.Check type='checkbox' label='Прямоугольный' />
+                                                <Form.Check type='checkbox' label='Квадрат' />
+                                            </Form>
+                                        </Card.Body>
+                                    </Accordion.Collapse>
+                                </Card>
                             </Accordion>
                         </Col>
                         <Col xs={6} md={4}>
