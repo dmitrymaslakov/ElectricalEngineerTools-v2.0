@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Room from './components/Room'
 import Luminaire from './components/Luminaire'
+import Management from './components/Management'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
@@ -19,6 +20,7 @@ const App = () => {
         </Col>
         <Col>
           <Luminaire></Luminaire>
+          <Management></Management>
         </Col>
       </Row>
     </Container>

@@ -8,6 +8,8 @@ import Accordion from 'react-bootstrap/Accordion'
 import { useAccordionButton } from 'react-bootstrap/AccordionButton'
 import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
+import InputGroup from 'react-bootstrap/InputGroup'
+import FormControl from 'react-bootstrap/FormControl'
 
 const CustomToggle = ({ children, eventKey }) => {
     const decoratedOnClick = useAccordionButton(eventKey)
@@ -78,9 +80,9 @@ let cards = luminaireData.map(luminaire =>
     </Card>
 )
 
-function MydModalWithGrid(props) {
+function LuminaireParams(props) {
     return (
-        <Modal {...props} aria-labelledby="contained-modal-title-vcenter" fullscreen='true'>
+        <Modal {...props} aria-labelledby="contained-modal-title-vcenter" fullscreen='true' size='lg'>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Выбери светильник
@@ -93,9 +95,6 @@ function MydModalWithGrid(props) {
                             <Accordion defaultActiveKey={['0', '1', '2', '3', '4', '5', '6']} alwaysOpen>
                                 {cards}
                             </Accordion>
-                        </Col>
-                        <Col xs={6} md={4}>
-                            .col-xs-6 .col-md-4
                         </Col>
                     </Row>
                 </Container>
@@ -115,8 +114,22 @@ const Luminaire = () => {
             <label className='fs-5'>Тип светильника</label>
             <br />
             <Button variant='secondary' className='my-3' onClick={() => setModalShow(true)}>Выбрать светильник</Button>
-
-            <MydModalWithGrid show={modalShow} onHide={() => setModalShow(false)} />
+            <LuminaireParams show={modalShow} onHide={() => setModalShow(false)} />
+            <br />
+            <label className='fs-5 mb-3'>Лампа</label>
+            <br />
+            <label className='fs-5 mb-3'>Мощность, Вт</label>
+            <br />
+            <InputGroup>
+                <InputGroup.Text>Световой поток, лм</InputGroup.Text>
+                <FormControl />
+            </InputGroup>
+            <br />
+            <InputGroup>
+                <InputGroup.Text>Высота установки, м</InputGroup.Text>
+                <FormControl />
+            </InputGroup>
+            
         </>
     )
 }
