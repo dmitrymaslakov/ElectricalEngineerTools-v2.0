@@ -81,6 +81,7 @@ let cards = luminaireData.map(luminaire =>
 )
 
 function LuminaireParams(props) {
+    
     return (
         <Modal {...props} aria-labelledby="contained-modal-title-vcenter" fullscreen='true' size='lg'>
             <Modal.Header closeButton>
@@ -106,7 +107,9 @@ function LuminaireParams(props) {
     )
 }
 
-const Luminaire = () => {
+const Luminaire = (props) => {
+    let t = props.addManufacturer('pop')
+    debugger
     const [modalShow, setModalShow] = useState(false)
 
     return (
