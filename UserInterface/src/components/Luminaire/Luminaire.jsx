@@ -65,23 +65,51 @@ let luminaireData = [
     }
 ]
 
-let cards = luminaireData.map(luminaire =>
-    <Card>
-        <Card.Header>
-            <CustomToggle eventKey={luminaire.id}>{luminaire.dataType.type}</CustomToggle>
-        </Card.Header>
-        <Accordion.Collapse eventKey={luminaire.id}>
-            <Card.Body>
-                <Form>
-                    {luminaire.dataType.namesType.map(name => <Form.Check type='checkbox' label={name} />)}
-                </Form>
-            </Card.Body>
-        </Accordion.Collapse>
-    </Card>
-)
+let cards = (params) => {
+    let t = params
+    debugger
+    return(
+        params.luminaireParameters.map(parameter => 
+            <Card>
+                <Card.Header>
+                    <CustomToggle eventKey={parameter.id}>{parameter.name}</CustomToggle>
+                </Card.Header>
+                <Accordion.Collapse eventKey={parameter.id}>
+                    <Card.Body>
+                        <Form>
+                        {
+                            switch (parameter.name) {
+                                case 'Производитель':
+                                    return {params.manufacturers.map(manufacturer => <Form.Check type='checkbox' label={manufacturer.name} />))}
+                                    
+                            
+                                default:
+                                    break;
+                            }
+                        }
+                        </Form>
+                    </Card.Body>
+                </Accordion.Collapse>
+            </Card>
+        )
+        // luminaireData.map(luminaire =>
+        //     <Card>
+        //         <Card.Header>
+        //             <CustomToggle eventKey={luminaire.id}>{luminaire.dataType.type}</CustomToggle>
+        //         </Card.Header>
+        //         <Accordion.Collapse eventKey={luminaire.id}>
+        //             <Card.Body>
+        //                 <Form>
+        //                     {luminaire.dataType.namesType.map(name => <Form.Check type='checkbox' label={name} />)}
+        //                 </Form>
+        //             </Card.Body>
+        //         </Accordion.Collapse>
+        //     </Card>
+        // )
+    )
+}
 
 function LuminaireParams(props) {
-    
     return (
         <Modal {...props} aria-labelledby="contained-modal-title-vcenter" fullscreen='true' size='lg'>
             <Modal.Header closeButton>
@@ -94,7 +122,7 @@ function LuminaireParams(props) {
                     <Row>
                         <Col xs={12} md={8}>
                             <Accordion defaultActiveKey={['0', '1', '2', '3', '4', '5', '6']} alwaysOpen>
-                                {cards}
+                                {cards({...props})}
                             </Accordion>
                         </Col>
                     </Row>
@@ -108,8 +136,11 @@ function LuminaireParams(props) {
 }
 
 const Luminaire = (props) => {
-    let t = props.addManufacturer('pop')
-    debugger
+    let params = {
+        luminaireParameters: props.luminaireParameters,
+        manufacturers: props.manufacturers,
+    }
+
     const [modalShow, setModalShow] = useState(false)
 
     return (
@@ -117,7 +148,7 @@ const Luminaire = (props) => {
             <label className='fs-5'>Тип светильника</label>
             <br />
             <Button variant='secondary' className='my-3' onClick={() => setModalShow(true)}>Выбрать светильник</Button>
-            <LuminaireParams show={modalShow} onHide={() => setModalShow(false)} />
+            <LuminaireParams {...props} show={modalShow} onHide={() => setModalShow(false)} />
             <br />
             <label className='fs-5 mb-3'>Лампа</label>
             <br />
