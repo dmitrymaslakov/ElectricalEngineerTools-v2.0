@@ -19,93 +19,22 @@ const CustomToggle = ({ children, eventKey }) => {
     )
 }
 
-let luminaireData = [
-    {
-        id: '0', dataType: {
-            type: 'Производитель',
-            namesType: ['SVS-Lighting', 'Lighting Technologies', 'ЗАО Белинтегра']
-        }
-    },
-    {
-        id: '1', dataType: {
-            type: 'Форма',
-            namesType: ['Прямоугольный', 'Квадрат']
-        }
-    },
-    {
-        id: '2', dataType: {
-            type: 'Способ монтажа',
-            namesType: ['Потолочный', 'Встраиваемый в Armstrong', 'Встраиваемый в гипсокартон', 'Подвесной']
-        }
-    },
-    {
-        id: '3', dataType: {
-            type: 'Источник света',
-            namesType: ['Светодиодный модуль', 'Светодиодная лампа', 'Люминесцентная лампа', 'Лампа накаливания']
-        }
-    },
-    {
-        id: '4', dataType: {
-            type: 'Количество ламп в светильнике',
-            namesType: [1, 2, 3, 4]
-        }
-    },
-    {
-        id: '5', dataType: {
-            type: 'Климатическое исполнение',
-            namesType: ['УХЛ1', 'УХЛ2', 'УХЛ4', 'УХЛ5']
-        }
-    }
-    ,
-    {
-        id: '6', dataType: {
-            type: 'Остальные параметры',
-            namesType: ['Пылевлагозащищенный', 'Пожаробезопасный', 'Взрывобезопасный', 'БАП']
-        }
-    }
-]
-
 let cards = (params) => {
-    let t = params
-    debugger
     return(
-        params.luminaireParameters.map(parameter => 
+        params.luminaireParameters.map(parameter =>
             <Card>
                 <Card.Header>
-                    <CustomToggle eventKey={parameter.id}>{parameter.name}</CustomToggle>
+                    <CustomToggle eventKey={parameter.id.toString()}>{parameter.name}</CustomToggle>
                 </Card.Header>
-                <Accordion.Collapse eventKey={parameter.id}>
+                <Accordion.Collapse eventKey={parameter.id.toString()}>
                     <Card.Body>
                         <Form>
-                        {
-                            switch (parameter.name) {
-                                case 'Производитель':
-                                    return {params.manufacturers.map(manufacturer => <Form.Check type='checkbox' label={manufacturer.name} />))}
-                                    
-                            
-                                default:
-                                    break;
-                            }
-                        }
+                            {parameter.value.map(name => <Form.Check type='checkbox' label={name} />)}
                         </Form>
                     </Card.Body>
                 </Accordion.Collapse>
             </Card>
         )
-        // luminaireData.map(luminaire =>
-        //     <Card>
-        //         <Card.Header>
-        //             <CustomToggle eventKey={luminaire.id}>{luminaire.dataType.type}</CustomToggle>
-        //         </Card.Header>
-        //         <Accordion.Collapse eventKey={luminaire.id}>
-        //             <Card.Body>
-        //                 <Form>
-        //                     {luminaire.dataType.namesType.map(name => <Form.Check type='checkbox' label={name} />)}
-        //                 </Form>
-        //             </Card.Body>
-        //         </Accordion.Collapse>
-        //     </Card>
-        // )
     )
 }
 
@@ -121,7 +50,7 @@ function LuminaireParams(props) {
                 <Container>
                     <Row>
                         <Col xs={12} md={8}>
-                            <Accordion defaultActiveKey={['0', '1', '2', '3', '4', '5', '6']} alwaysOpen>
+                            <Accordion defaultActiveKey={props.luminaireParameters.map(p => p.id.toString())} alwaysOpen>
                                 {cards({...props})}
                             </Accordion>
                         </Col>
@@ -136,11 +65,6 @@ function LuminaireParams(props) {
 }
 
 const Luminaire = (props) => {
-    let params = {
-        luminaireParameters: props.luminaireParameters,
-        manufacturers: props.manufacturers,
-    }
-
     const [modalShow, setModalShow] = useState(false)
 
     return (
@@ -163,7 +87,6 @@ const Luminaire = (props) => {
                 <InputGroup.Text>Высота установки, м</InputGroup.Text>
                 <FormControl />
             </InputGroup>
-            
         </>
     )
 }

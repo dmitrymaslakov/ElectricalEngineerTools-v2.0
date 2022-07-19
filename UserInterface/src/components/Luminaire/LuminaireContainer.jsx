@@ -5,8 +5,7 @@ import {addParameter, addManufacturer} from '../../redux/luminaire-slice'
 
 let mapStateToProps = (state) => {
     return {
-        luminaireParameters: state.luminaire.luminaireParameters,
-        manufacturers: state.luminaire.manufacturers
+        luminaireParameters: state.luminaire.luminaireParameters
     }
 }
 
