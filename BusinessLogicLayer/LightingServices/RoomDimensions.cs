@@ -10,14 +10,14 @@ using Autodesk.AutoCAD.Geometry;
 using Autodesk.AutoCAD.EditorInput;
 using AcRnt = Autodesk.AutoCAD.Runtime;
 
-[assembly: CommandClass(typeof(LightingServices.RoomDimensions))]
+[assembly: AcRnt.CommandClass(typeof(LightingServices.RoomDimensions))]
 
 namespace LightingServices
 {
     public class RoomDimensions
     {
-        [AcRnt.JavaScriptCallback("TestDotNetRead")]
-        public double[] DetermineRoomDimensions()
+        [AcRnt.JavaScriptCallback("DetermineRoomDimensions")]
+        public string DetermineRoomDimensions(string jsonArgs)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace LightingServices
                 //Если ПСК повернут, то отрегулируем угол поворота светильников
                 double dArrayAng = acVec2dAng.Angle;
                 Point3d[] arrayPoints = new Point3d[4];
-                PaletteService.RollUpPalette();
+                //PaletteService.RollUpPalette();
                 // выбор диагонали помещения
                 var pPtOpts = new PromptPointOptions("")
                 {
@@ -43,7 +43,7 @@ namespace LightingServices
                 pPtRes = ed.GetPoint(pPtOpts);
                 Point3d ptEnd = pPtRes.Value;
                 if (pPtRes.Status == PromptStatus.Cancel) return null;
-                PaletteService.UnrollPalette();
+                //PaletteService.UnrollPalette();
                 arrayPoints[0] = UcsToWcs(ptStart);
                 arrayPoints[1] = UcsToWcs(ptEnd);
                 // точки прямоугольника-помещения. Они содержат координаты помещения в пространстве
@@ -92,7 +92,7 @@ namespace LightingServices
                     distance1 = Math.Abs(point2Ds[2].X - point2Ds[0].X) / 1000;
                     distance2 = Math.Abs(point2Ds[1].Y - point2Ds[0].Y) / 1000;
                 }
-                return new double[] { distance1, distance2 };
+                return "{\"retCode\":0, \"result\":\"OK\"}";
             }
             catch (Exception ex)
             {
@@ -101,6 +101,11 @@ namespace LightingServices
                 MessageBox.Show(exception.ToString());
                 return null;
             }
+        }
+        [AcRnt.CommandMethod("Method")]
+        public void Method()
+        {
+            //DetermineRoomDimensions();
         }
     }
 }

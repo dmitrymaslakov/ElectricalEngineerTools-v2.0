@@ -1,29 +1,19 @@
-function InvokeRead() {
+function InvokeDetermineRoomDimensions() {
 
-    execAsync(JSON.stringify({
-        functionName: 'TestDotNetRead',
+    let res = execAsync(JSON.stringify({
+        functionName: 'DetermineRoomDimensions',
         invokeAsCommand: false,
         functionParams: { args: 'args' }
     }),
     OnArxSuccess,
-    OnArxError);
-}
-
-function InvokeWrite() {
-
-    execAsync(JSON.stringify({
-        functionName: 'TestDotNetWrite',
-        invokeAsCommand: false,
-        functionParams: { args: 'args' }
-    }),
-    OnArxSuccess,
-    OnArxError);
+    OnArxError)
 }
 
 function OnArxSuccess(result) {
-    console.log('')
+    let res = result
+    console.log('Success')
 }
 
 function OnArxError(result) {
-    console.log('')
+    console.log('Error')
 }

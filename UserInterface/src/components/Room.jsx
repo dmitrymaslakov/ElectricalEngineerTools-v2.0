@@ -22,7 +22,7 @@ const Room = () => {
                 <FormControl />
             </InputGroup>
             <br />
-            <Button variant='secondary' className='mb-3'>Вычислить размеры</Button>
+            <Button onClick={window['InvokeDetermineRoomDimensions']} variant='secondary' className='mb-3'>Вычислить размеры</Button>
             <br />
             <label className='fs-5'>Площадь, м2</label>
             <br />
