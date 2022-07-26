@@ -7,10 +7,12 @@ function InvokeDetermineRoomDimensions() {
     }),
     OnArxSuccess,
     OnArxError)
+
+
 }
 
 function OnArxSuccess(result) {
-    let res = result
+    let res = JSON.parse(result)
     console.log('Success')
 }
 

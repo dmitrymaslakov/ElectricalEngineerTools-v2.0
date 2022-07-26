@@ -9,6 +9,7 @@ using AcAppServices = Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.Geometry;
 using Autodesk.AutoCAD.EditorInput;
 using AcRnt = Autodesk.AutoCAD.Runtime;
+using Newtonsoft.Json;
 
 [assembly: AcRnt.CommandClass(typeof(LightingServices.RoomDimensions))]
 
@@ -92,7 +93,15 @@ namespace LightingServices
                     distance1 = Math.Abs(point2Ds[2].X - point2Ds[0].X) / 1000;
                     distance2 = Math.Abs(point2Ds[1].Y - point2Ds[0].Y) / 1000;
                 }
-                return "{\"retCode\":0, \"result\":\"OK\"}";
+
+                string json = JsonConvert.SerializeObject(
+                    new
+                    {
+                        retCode = 0,
+                        retValue = new double[] { distance1, distance2 }
+                    }
+                    );
+                return json;
             }
             catch (Exception ex)
             {
