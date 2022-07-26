@@ -99,8 +99,7 @@ namespace LightingServices
                     {
                         retCode = 0,
                         retValue = new double[] { distance1, distance2 }
-                    }
-                    );
+                    });
                 return json;
             }
             catch (Exception ex)
@@ -110,11 +109,6 @@ namespace LightingServices
                 MessageBox.Show(exception.ToString());
                 return null;
             }
-        }
-        [AcRnt.CommandMethod("Method")]
-        public void Method()
-        {
-            //DetermineRoomDimensions();
         }
     }
 }
