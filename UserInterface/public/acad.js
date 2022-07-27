@@ -1,6 +1,6 @@
 function InvokeDetermineRoomDimensions() {
 
-    let res = execAsync(JSON.stringify({
+    execAsync(JSON.stringify({
         functionName: 'DetermineRoomDimensions',
         invokeAsCommand: false,
         functionParams: { args: 'args' }
@@ -12,7 +12,6 @@ function InvokeDetermineRoomDimensions() {
 }
 
 function OnArxSuccess(result) {
-    let res = JSON.parse(result)
     console.log('Success')
 }
 

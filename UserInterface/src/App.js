@@ -2,8 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-import Room from './components/Room'
-import Luminaire from './components/Luminaire/LuminaireContainer'
+import RoomContainer from './components/Room/RoomContainer'
+import LuminaireContainer from './components/Luminaire/LuminaireContainer'
 import Management from './components/Management'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -16,10 +16,10 @@ const App = () => {
     <Container fluid='true' className='border border-success mx-0'>
       <Row>
         <Col sm={5}>
-          <Room />
+          <RoomContainer />
         </Col>
         <Col>
-          <Luminaire></Luminaire>
+          <LuminaireContainer></LuminaireContainer>
           <Management></Management>
         </Col>
       </Row>
