@@ -3,14 +3,17 @@ import { connect } from 'react-redux'
 import Room from './Room'
 import { thunkCreator } from '../../redux/room-slice'
 
-
 class RoomContainer extends React.Component {
-    componentDidMount() {
+
+    onRoomChanged = () => {
+        console.log('Dimmu')
         this.props.thunkCreator()
     }
 
-    onPageChanged = (pageNumber) => {
-        this.props.getUsers(pageNumber, this.props.pageSize);
+    render() {
+        return <>
+            <Room onRoomChanged={this.onRoomChanged}></Room>
+        </>
     }
 }
 let mapStateToProps = (state) => {
@@ -19,6 +22,5 @@ let mapStateToProps = (state) => {
     }
 }
 
-const RoomContainer = connect(mapStateToProps, { thunkCreator })(RoomContainer)
+export default connect(mapStateToProps, { thunkCreator })(RoomContainer)
 
-export default RoomContainer
