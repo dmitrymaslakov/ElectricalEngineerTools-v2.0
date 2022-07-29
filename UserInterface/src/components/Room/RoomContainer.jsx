@@ -6,7 +6,6 @@ import { thunkCreator } from '../../redux/room-slice'
 class RoomContainer extends React.Component {
 
     onRoomChanged = () => {
-        console.log('Dimmu')
         this.props.thunkCreator()
     }
 

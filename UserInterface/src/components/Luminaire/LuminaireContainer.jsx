@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Luminaire from './Luminaire'
-import {addParameter, addManufacturer} from '../../redux/luminaire-slice'
+import {addParameter, addManufacturer, thunkLum} from '../../redux/luminaire-slice'
 
 let mapStateToProps = (state) => {
     return {
@@ -13,7 +13,8 @@ let mapDispatchToProps = (dispatch) => {
     
     return {
         addParameter: (parameter) => {dispatch(addParameter(parameter))},
-        addManufacturer: (manufacturer) => {dispatch(addManufacturer(manufacturer))}
+        addManufacturer: (manufacturer) => {dispatch(addManufacturer(manufacturer))},
+        thunkLum: () => {dispatch(thunkLum())}
     }
 }
 

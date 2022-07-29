@@ -9,25 +9,32 @@ const roomSlice = createSlice({
     initialState,
     reducers: {
         changeDimensions(state, action) {
-            console.log('reducer')
+            console.log(action.payload)
+
             //state.room = { length: action.payload.length, width: action.payload.width }
         }
     }
 })
 
 export const thunkCreator = () => {
-    let wrapExecAsync = window['execAsync']
-
-    //const secc = res => {dispatch(changeDimensions(res.retValue))}
-    const secc = (result) => console.log(result.retValue)
-    const err = () => console.log('err')
     return (dispatch) => {
+        /*let obj
+        const secc = (result) => {
+            obj = JSON.parse(result)
+            console.log(obj.retValue)
+        }
+
+        let wrapExecAsync = window['execAsync']
         wrapExecAsync(JSON.stringify({
             functionName: 'DetermineRoomDimensions',
             invokeAsCommand: false,
-            functionParams: { args: 'args' }}),
+            functionParams: { args: 'args' }
+        }),
             secc,
-            err)
+            result => console.log('err'))*/
+
+
+        dispatch(changeDimensions('obj'))
     }
 }
 

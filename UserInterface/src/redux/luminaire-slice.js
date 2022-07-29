@@ -17,13 +17,20 @@ const luminaireSlice = createSlice({
     initialState,
     reducers: {
         addParameter(state, action){
-            state.luminaireParameters.push({id:action.payload.id, name: action.payload.name})
+            console.log(action.payload)
+            // state.luminaireParameters.push({id:action.payload.id, name: action.payload.name})
         },
         addManufacturer(state, action){
             state.manufacturers.push({id:action.payload.id, name: action.payload.name})
         }
     }
 })
+
+export const thunkLum = ()=>{
+    return dispatch => {
+        dispatch(addParameter('borger'))
+    }
+}
 
 export const {addParameter, addManufacturer} = luminaireSlice.actions
 export default luminaireSlice.reducer
