@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    room: { length: 0.0, width: 0.0 }
+    roomDimensions: { length: 0.0, width: 0.0 }
 }
 
 const roomSlice = createSlice({
@@ -9,34 +9,35 @@ const roomSlice = createSlice({
     initialState,
     reducers: {
         changeDimensions(state, action) {
-            console.log(action.payload)
-
-            //state.room = { length: action.payload.length, width: action.payload.width }
+            state.roomDimensions = { length: action.payload.length, width: action.payload.width }
+        },
+        updateLength(state, action){
+            state.roomDimensions.length = action.payload
+        },
+        updateWidth(state, action){
+            state.roomDimensions.width = action.payload
         }
     }
 })
 
-export const thunkCreator = () => {
+export const launchRoomDimensions = () => {
     return (dispatch) => {
-        /*let obj
-        const secc = (result) => {
-            obj = JSON.parse(result)
-            console.log(obj.retValue)
-        }
-
-        let wrapExecAsync = window['execAsync']
-        wrapExecAsync(JSON.stringify({
-            functionName: 'DetermineRoomDimensions',
-            invokeAsCommand: false,
-            functionParams: { args: 'args' }
-        }),
-            secc,
-            result => console.log('err'))*/
-
-
-        dispatch(changeDimensions('obj'))
+        window['execAsync'](
+            JSON.stringify({
+                functionName: 'DetermineRoomDimensions',
+                invokeAsCommand: false,
+                functionParams: { args: 'args' }
+            }),
+            resultAsString => {
+                const [length, width] = JSON.parse(resultAsString).retValue
+                dispatch(changeDimensions({length, width}))
+            },
+            resultAsString => {
+                console.log(JSON.parse(resultAsString))
+            }
+        )
     }
 }
 
-export const { changeDimensions } = roomSlice.actions
+export const {updateLength, updateWidth, changeDimensions } = roomSlice.actions
 export default roomSlice.reducer

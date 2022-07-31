@@ -74,6 +74,7 @@ const Luminaire = (props) => {
                 <br />
                 <Button variant='secondary' className='my-3' onClick={() => setModalShow(true)}>Выбрать светильник</Button>
                 <Button variant='secondary' className='my-3' onClick={() => props.thunkLum()}>Launch</Button>
+                <Button variant='secondary' className='my-3' onClick={() => props.addParameter('qwe')}>Add</Button>
                 <LuminaireParams {...props} show={modalShow} onHide={() => setModalShow(false)} />
                 <br />
                 <label className='fs-5 mb-3'>Лампа</label>

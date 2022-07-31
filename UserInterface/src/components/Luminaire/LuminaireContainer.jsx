@@ -9,15 +9,6 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    
-    return {
-        addParameter: (parameter) => {dispatch(addParameter(parameter))},
-        addManufacturer: (manufacturer) => {dispatch(addManufacturer(manufacturer))},
-        thunkLum: () => {dispatch(thunkLum())}
-    }
-}
-
-const LuminaireContainer = connect(mapStateToProps, mapDispatchToProps)(Luminaire)
+const LuminaireContainer = connect(mapStateToProps, {addParameter, addManufacturer, thunkLum})(Luminaire)
 
 export default LuminaireContainer

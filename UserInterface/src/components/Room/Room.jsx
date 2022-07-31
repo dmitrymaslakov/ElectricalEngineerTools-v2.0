@@ -10,20 +10,29 @@ import Container from 'react-bootstrap/Container'
 import Dropdown from 'react-bootstrap/Dropdown'
 
 const Room = (props) => {
+    let newLength = React.createRef()
+    let onLengthChange = () => {
+        let length = newLength.current.value
+        props.updateLength(length)
+    }
+    let newWidth = React.createRef()
+    let onWidthChange = () => {
+        let width = newWidth.current.value
+        props.updateWidth(width)
+    }
     return (
         <>
             <InputGroup>
                 <InputGroup.Text>Длина, м</InputGroup.Text>
-                <FormControl />
+                <FormControl value={props.roomDimensions.length} ref={newLength} onChange={onLengthChange}/>
             </InputGroup>
             <br />
             <InputGroup>
                 <InputGroup.Text>Ширина, м</InputGroup.Text>
-                <FormControl />
+                <FormControl value={props.roomDimensions.width} ref={newWidth} onChange={onWidthChange}/>
             </InputGroup>
             <br />
-            {/* <Button onClick={window['InvokeDetermineRoomDimensions']} variant='secondary' className='mb-3'>Вычислить размеры</Button> */}
-            <Button onClick={(e) => {props.onRoomChanged()}} variant='secondary' className='mb-3'>Вычислить размеры</Button>
+            <Button onClick={(e) => {props.launchRoomDimensions()}} variant='secondary' className='mb-3'>Вычислить размеры</Button>
             <br />
             <label className='fs-5'>Площадь, м2</label>
             <br />

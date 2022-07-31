@@ -1,25 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Room from './Room'
-import { thunkCreator } from '../../redux/room-slice'
+import { updateLength, updateWidth, launchRoomDimensions } from '../../redux/room-slice'
 
-class RoomContainer extends React.Component {
-
-    onRoomChanged = () => {
-        this.props.thunkCreator()
-    }
-
-    render() {
-        return <>
-            <Room onRoomChanged={this.onRoomChanged}></Room>
-        </>
-    }
-}
 let mapStateToProps = (state) => {
     return {
-        room: state.room
+        roomDimensions: state.room.roomDimensions
     }
 }
 
-export default connect(mapStateToProps, { thunkCreator })(RoomContainer)
+export default connect(mapStateToProps, { updateLength, updateWidth, launchRoomDimensions })(Room)
 
