@@ -1,4 +1,3 @@
-import React from 'react'
 import {connect} from 'react-redux'
 import Luminaire from './Luminaire'
 import {addParameter, addManufacturer, thunkLum} from '../../redux/luminaire-slice'

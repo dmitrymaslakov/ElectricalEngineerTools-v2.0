@@ -4,37 +4,37 @@ import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import Card from 'react-bootstrap/Card'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Container from 'react-bootstrap/Container'
-import Dropdown from 'react-bootstrap/Dropdown'
 
 const Room = (props) => {
-    let newLength = React.createRef()
-    let onLengthChange = () => {
-        let length = newLength.current.value
+    const newLength = React.createRef()
+    const onLengthChange = () => {
+        const length = newLength.current.value
         props.updateLength(length)
+        props.updateArea({length: props.dimensions.length, width: props.dimensions.width})
+        console.log(props.area)
     }
-    let newWidth = React.createRef()
-    let onWidthChange = () => {
-        let width = newWidth.current.value
+    const newWidth = React.createRef()
+    const onWidthChange = () => {
+        const width = newWidth.current.value
         props.updateWidth(width)
+        props.updateArea({length: props.dimensions.length, width: props.dimensions.width})
+        console.log(props.area)
     }
     return (
         <>
             <InputGroup>
                 <InputGroup.Text>Длина, м</InputGroup.Text>
-                <FormControl value={props.roomDimensions.length} ref={newLength} onChange={onLengthChange}/>
+                <FormControl value={props.dimensions.length} ref={newLength} onChange={onLengthChange}/>
             </InputGroup>
             <br />
             <InputGroup>
                 <InputGroup.Text>Ширина, м</InputGroup.Text>
-                <FormControl value={props.roomDimensions.width} ref={newWidth} onChange={onWidthChange}/>
+                <FormControl value={props.dimensions.width} ref={newWidth} onChange={onWidthChange}/>
             </InputGroup>
             <br />
             <Button onClick={(e) => {props.launchRoomDimensions()}} variant='secondary' className='mb-3'>Вычислить размеры</Button>
             <br />
-            <label className='fs-5'>Площадь, м2</label>
+            <label className='fs-5'>Площадь, м2 <label className='fs-5'>{props.area}</label></label>
             <br />
             <Form.Select className='my-3'>
                 <option>РпРсРр</option>

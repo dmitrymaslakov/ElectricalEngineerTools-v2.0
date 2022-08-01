@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    roomDimensions: { length: 0.0, width: 0.0 }
+    dimensions: { length: 0.0, width: 0.0 },
+    area: 0.0
 }
 
 const roomSlice = createSlice({
@@ -9,13 +10,16 @@ const roomSlice = createSlice({
     initialState,
     reducers: {
         changeDimensions(state, action) {
-            state.roomDimensions = { length: action.payload.length, width: action.payload.width }
+            state.dimensions = { length: action.payload.length, width: action.payload.width }
         },
-        updateLength(state, action){
-            state.roomDimensions.length = action.payload
+        updateLength(state, action) {
+            state.dimensions.length = action.payload
         },
-        updateWidth(state, action){
-            state.roomDimensions.width = action.payload
+        updateWidth(state, action) {
+            state.dimensions.width = action.payload
+        },
+        updateArea(state, action) {
+            state.area = action.payload.length * action.payload.width
         }
     }
 })
@@ -30,7 +34,7 @@ export const launchRoomDimensions = () => {
             }),
             resultAsString => {
                 const [length, width] = JSON.parse(resultAsString).retValue
-                dispatch(changeDimensions({length, width}))
+                dispatch(changeDimensions({ length, width }))
             },
             resultAsString => {
                 console.log(JSON.parse(resultAsString))
@@ -39,5 +43,5 @@ export const launchRoomDimensions = () => {
     }
 }
 
-export const {updateLength, updateWidth, changeDimensions } = roomSlice.actions
+export const { updateLength, updateWidth, updateArea, changeDimensions } = roomSlice.actions
 export default roomSlice.reducer
