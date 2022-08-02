@@ -20,8 +20,8 @@ const CustomToggle = ({ children, eventKey }) => {
 }
 
 let cards = (params) => {
-    return(
-        params.luminaireParameters.map(parameter =>
+    return (
+        params.map(parameter =>
             <Card key={parameter.id}>
                 <Card.Header>
                     <CustomToggle eventKey={parameter.id.toString()}>{parameter.name}</CustomToggle>
@@ -29,7 +29,7 @@ let cards = (params) => {
                 <Accordion.Collapse eventKey={parameter.id.toString()}>
                     <Card.Body>
                         <Form>
-                            {parameter.value.map(name => <Form.Check type='checkbox' label={name} key={name}/>)}
+                            {parameter.value.map(name => <Form.Check type='checkbox' label={name} key={name} />)}
                         </Form>
                     </Card.Body>
                 </Accordion.Collapse>
@@ -51,7 +51,7 @@ function LuminaireParams(props) {
                     <Row>
                         <Col xs={12} md={8}>
                             <Accordion defaultActiveKey={props.luminaireParameters.map(p => p.id.toString())} alwaysOpen>
-                                {cards({...props})}
+                                {cards(props.luminaireParameters)}
                             </Accordion>
                         </Col>
                     </Row>
@@ -65,37 +65,30 @@ function LuminaireParams(props) {
 }
 
 const Luminaire = (props) => {
-    try{
-        const [modalShow, setModalShow] = useState(false)
+    const [modalShow, setModalShow] = useState(false)
 
-        return (    
-            <>
-                <label className='fs-5'>Тип светильника</label>
-                <br />
-                <Button variant='secondary' className='my-3' onClick={() => setModalShow(true)}>Выбрать светильник</Button>
-                <Button variant='secondary' className='my-3' onClick={() => props.thunkLum()}>Launch</Button>
-                <Button variant='secondary' className='my-3' onClick={() => props.addParameter('qwe')}>Add</Button>
-                <LuminaireParams {...props} show={modalShow} onHide={() => setModalShow(false)} />
-                <br />
-                <label className='fs-5 mb-3'>Лампа</label>
-                <br />
-                <label className='fs-5 mb-3'>Мощность, Вт</label>
-                <br />
-                <InputGroup>
-                    <InputGroup.Text>Световой поток, лм</InputGroup.Text>
-                    <FormControl />
-                </InputGroup>
-                <br />
-                <InputGroup>
-                    <InputGroup.Text>Высота установки, м</InputGroup.Text>
-                    <FormControl />
-                </InputGroup>
-            </>
-        )
-    }catch(e) {
-        return <div>{e.Body}</div>
-      }
-    
+    return (
+        <>
+            <label className='fs-5'>Тип светильника</label>
+            <br />
+            <Button variant='secondary' className='my-3' onClick={() => setModalShow(true)}>Выбрать светильник</Button>
+            <LuminaireParams {...props} show={modalShow} onHide={() => setModalShow(false)} />
+            <br />
+            <label className='fs-5 mb-3'>Лампа</label>
+            <br />
+            <label className='fs-5 mb-3'>Мощность, Вт</label>
+            <br />
+            <InputGroup>
+                <InputGroup.Text>Световой поток, лм</InputGroup.Text>
+                <FormControl />
+            </InputGroup>
+            <br />
+            <InputGroup>
+                <InputGroup.Text>Высота установки, м</InputGroup.Text>
+                <FormControl />
+            </InputGroup>
+        </>
+    )
 }
 
 export default Luminaire

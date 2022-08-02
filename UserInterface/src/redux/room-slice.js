@@ -19,7 +19,7 @@ const roomSlice = createSlice({
             state.dimensions.width = action.payload
         },
         updateArea(state, action) {
-            state.area = action.payload.length * action.payload.width
+            state.area = state.dimensions.width * state.dimensions.length
         }
     }
 })
@@ -35,6 +35,7 @@ export const launchRoomDimensions = () => {
             resultAsString => {
                 const [length, width] = JSON.parse(resultAsString).retValue
                 dispatch(changeDimensions({ length, width }))
+                dispatch(updateArea())
             },
             resultAsString => {
                 console.log(JSON.parse(resultAsString))

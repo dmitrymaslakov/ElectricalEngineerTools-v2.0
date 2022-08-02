@@ -10,15 +10,13 @@ const Room = (props) => {
     const onLengthChange = () => {
         const length = newLength.current.value
         props.updateLength(length)
-        props.updateArea({length: props.dimensions.length, width: props.dimensions.width})
-        console.log(props.area)
+        props.updateArea()
     }
     const newWidth = React.createRef()
     const onWidthChange = () => {
         const width = newWidth.current.value
         props.updateWidth(width)
-        props.updateArea({length: props.dimensions.length, width: props.dimensions.width})
-        console.log(props.area)
+        props.updateArea()
     }
     return (
         <>
@@ -34,7 +32,7 @@ const Room = (props) => {
             <br />
             <Button onClick={(e) => {props.launchRoomDimensions()}} variant='secondary' className='mb-3'>Вычислить размеры</Button>
             <br />
-            <label className='fs-5'>Площадь, м2 <label className='fs-5'>{props.area}</label></label>
+            <label className='fs-5'>Площадь, <label className='fs-5'>{props.area}  м2</label></label>
             <br />
             <Form.Select className='my-3'>
                 <option>РпРсРр</option>
