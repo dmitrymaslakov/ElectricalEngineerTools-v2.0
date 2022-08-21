@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.Extensions.Hosting;
 using static Ac.NetApi.Rivilis;
 using AcAppServices = Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.Geometry;
@@ -11,9 +12,9 @@ using Autodesk.AutoCAD.EditorInput;
 using AcRnt = Autodesk.AutoCAD.Runtime;
 using Newtonsoft.Json;
 
-[assembly: AcRnt.CommandClass(typeof(LightingServices.RoomDimensions))]
+[assembly: AcRnt.CommandClass(typeof(LightingServices.Api.RoomDimensions))]
 
-namespace LightingServices
+namespace LightingServices.Api
 {
     public class RoomDimensions
     {
