@@ -1,13 +1,13 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import Room from './Room'
-import { updateLength, updateWidth, launchRoomDimensions } from '../../redux/room-slice'
+import { updateLength, updateWidth, updateArea, launchRoomDimensions } from '../../redux/room-slice'
 
 let mapStateToProps = (state) => {
     return {
-        roomDimensions: state.room.roomDimensions
+        dimensions: state.room.dimensions,
+        area: state.room.area
     }
 }
 
-export default connect(mapStateToProps, { updateLength, updateWidth, launchRoomDimensions })(Room)
+export default connect(mapStateToProps, { updateLength, updateWidth, updateArea, launchRoomDimensions })(Room)
 

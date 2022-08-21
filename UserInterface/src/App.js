@@ -1,7 +1,4 @@
 import React from 'react'
-import { useState } from 'react'
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
 import RoomContainer from './components/Room/RoomContainer'
 import LuminaireContainer from './components/Luminaire/LuminaireContainer'
 import Management from './components/Management'
