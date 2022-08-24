@@ -31,6 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ac.NetApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Ac.NetApi.dll</HintPath>
+    </Reference>
+    <Reference Include="AcMaslakov, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\AcMaslakov.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,7 +50,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\BaseEntity.cs" />
-    <Compile Include="Lighting\Luminaire.cs" />
+    <Compile Include="Lighting\Cable.cs" />
+    <Compile Include="Lighting\ClimateApplication.cs" />
+    <Compile Include="Lighting\DiffuserMaterial.cs" />
+    <Compile Include="Lighting\Dimensions.cs" />
+    <Compile Include="Lighting\EquipmentClass.cs" />
+    <Compile Include="Lighting\IngressProtection.cs" />
+    <Compile Include="Lighting\LdtIesFileData.cs" />
+    <Compile Include="Lighting\LightSourceInfo.cs" />
+    <Compile Include="Lighting\LightingFixture.cs" />
+    <Compile Include="Lighting\Manufacturer.cs" />
+    <Compile Include="Lighting\Mounting.cs" />
+    <Compile Include="Lighting\TechnicalSpecifications.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

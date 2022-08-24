@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectricalServices.Domain",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightingServices.App", "LightingServices.App\LightingServices.App.csproj", "{BA97B495-5DC7-4445-9914-DFFDFC4D8A99}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectricalServices.Persistence", "ElectricalServices.Persistence\ElectricalServices.Persistence.csproj", "{8070EBE4-871E-4AF1-AC53-422461E5B8A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{BA97B495-5DC7-4445-9914-DFFDFC4D8A99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA97B495-5DC7-4445-9914-DFFDFC4D8A99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA97B495-5DC7-4445-9914-DFFDFC4D8A99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8070EBE4-871E-4AF1-AC53-422461E5B8A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8070EBE4-871E-4AF1-AC53-422461E5B8A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8070EBE4-871E-4AF1-AC53-422461E5B8A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8070EBE4-871E-4AF1-AC53-422461E5B8A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +47,7 @@ Global
 		{CFA38498-0484-4B13-A9D9-A82F79D443EA} = {7845652E-5C85-4CC0-A548-8D3215A0E31D}
 		{B34B31BD-FFE9-4674-BE52-DFDEBAFAF9FC} = {4C30B260-7A4C-4A1D-983E-393A5FBFD943}
 		{BA97B495-5DC7-4445-9914-DFFDFC4D8A99} = {4C30B260-7A4C-4A1D-983E-393A5FBFD943}
+		{8070EBE4-871E-4AF1-AC53-422461E5B8A6} = {3A4B8E51-7583-48FA-80FD-0F0B43C3A304}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {922EECB5-2EA0-4650-9761-2250361A33A1}
