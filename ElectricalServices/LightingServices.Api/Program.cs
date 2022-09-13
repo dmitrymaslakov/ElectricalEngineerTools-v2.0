@@ -12,6 +12,9 @@ using Autodesk.AutoCAD.Geometry;
 using Autodesk.AutoCAD.EditorInput;
 using AcRnt = Autodesk.AutoCAD.Runtime;
 using Newtonsoft.Json;
+using ElectricalServices.Persistence;
+using LightingServices.App;
+using Microsoft.Extensions.DependencyInjection;
 
 [assembly: AcRnt.ExtensionApplication(typeof(LightingServices.Api.Program))]
 
@@ -23,19 +26,16 @@ namespace LightingServices.Api
 
         public void Initialize()
         {
-            var configuration = new ConfigurationBuilder()
-                .AddEnvironmentVariables()
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-            _host = Host.CreateDefaultBuilder().Build();
+            _host = CreateHostBuilder().Build();
             _host.Start();
         }
 
-        private static IHostBuilder CreateHostBuilder(string[] args = null)
+        private IHostBuilder CreateHostBuilder(string[] args = null)
         {
-            return Host.CreateDefaultBuilder()
-                .Use
+            return Host.CreateDefaultBuilder(args)
+                .AddApi()
+                .AddPersistence()
+                .AddApplication()
                 ;
         }
 

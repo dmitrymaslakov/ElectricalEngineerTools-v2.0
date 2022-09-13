@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace ElectricalServices.Persistence
 {
-    public class DbInitializer
+    public class ConnectionStrings
     {
-        public static void Initialize(LightingDbContext context)
-        {
-            
-        }
+        public string MySql { get; set; }
     }
 }

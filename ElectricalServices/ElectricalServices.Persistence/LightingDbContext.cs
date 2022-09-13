@@ -14,6 +14,10 @@ namespace ElectricalServices.Persistence
         {
 
         }
+        public LightingDbContext(string connectionString) : base(connectionString)
+        {
+
+        }
         public LightingDbContext(DbConnection existingConnection, bool contextOwnsConnection)
             : base(existingConnection, contextOwnsConnection)
         {
