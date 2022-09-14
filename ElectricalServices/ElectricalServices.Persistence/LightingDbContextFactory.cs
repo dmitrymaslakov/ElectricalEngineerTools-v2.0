@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +14,14 @@ namespace ElectricalServices.Persistence
     {
         public LightingDbContext Create()
         {
-            return new LightingDbContext(new LightingDbContextBase());
+            IConfigurationRoot root = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            string connectionString = root.GetConnectionString("MySql");
+
+            return new LightingDbContext(connectionString);
         }
     }
 }

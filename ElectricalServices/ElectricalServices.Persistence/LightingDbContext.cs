@@ -10,10 +10,6 @@ namespace ElectricalServices.Persistence
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class LightingDbContext : DbContext, ILightingDbContext
     {
-        public LightingDbContext() : base()
-        {
-
-        }
         public LightingDbContext(string connectionString) : base(connectionString)
         {
 

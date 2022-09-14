@@ -6,10 +6,10 @@ using LightingServices.App.CQRS.Luminaire.Queries.GetLuminaireList;
 using LightingServices.App.Interfaces;
 using MediatR;
 using Newtonsoft.Json;
+using Serilog;
 using System.Threading.Tasks;
 using AcRnt = Autodesk.AutoCAD.Runtime;
 
-[assembly: AcRnt.CommandClass(typeof(LightingServices.Api.Controllers.LuminaireController))]
 
 namespace LightingServices.Api.Controllers
 {
@@ -20,7 +20,14 @@ namespace LightingServices.Api.Controllers
         public LuminaireController(IMediator mediator, IMapper mapper, ILightingDbContext dbContext)
             : base(mediator, mapper)
         {
-            _dbContext = dbContext;
+            try
+            {
+                _dbContext = dbContext;
+            }
+            catch (System.Exception exception)
+            {
+                Log.Error(exception, exception.Message);
+            }
         }
 
         public async Task<LuminaireListVm> GetAll()
@@ -66,10 +73,10 @@ namespace LightingServices.Api.Controllers
             return json;
         }
 
-        [AcRnt.CommandMethod("qwРасчетОсвещенностиПомещения", AcRnt.CommandFlags.Session)]
-        public void Method()
+        public void ControllerMethod()
         {
-
+            var res = _mediator.Send(new GetLuminaireDetailsQuery { Id = 1 });
+            var vm = res.Result;
         }
     }
 }

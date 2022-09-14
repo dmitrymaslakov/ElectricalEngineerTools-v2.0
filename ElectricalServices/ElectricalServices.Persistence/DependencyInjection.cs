@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using LightingServices.App.Interfaces;
 using Microsoft.Extensions.Options;
+using System.Data.Entity.Infrastructure;
 
 namespace ElectricalServices.Persistence
 {
@@ -17,16 +18,9 @@ namespace ElectricalServices.Persistence
         {
             hostBuilder.ConfigureServices((context, services) =>
             {
-                IConfiguration configuration = context.Configuration;
-
-                services.Configure<ConnectionStrings>(strings 
-                    => configuration.GetSection(nameof(ConnectionStrings)).Bind(strings));
-
-                Func<IServiceProvider, string> getConnectionString = provider
-                    => provider.GetService<IOptions<ConnectionStrings>>().Value.MySql;
-
-                services.AddScoped<ILightingDbContext>(provider 
-                    => new LightingDbContext(getConnectionString(provider)));
+                services.AddTransient<IDbContextFactory<LightingDbContext>, LightingDbContextFactory>();
+                services.AddScoped<ILightingDbContext>(provider
+                    => provider.GetService<IDbContextFactory<LightingDbContext>>().Create());
             });
 
             return hostBuilder;

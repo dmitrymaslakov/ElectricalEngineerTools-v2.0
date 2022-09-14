@@ -67,7 +67,6 @@
     <Compile Include="EntityTypeConfigurations\ManufacturerConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\LightingFixtureConfiguration.cs" />
     <Compile Include="LightingDbContext.cs" />
-    <Compile Include="LightingDbContextBase.cs" />
     <Compile Include="LightingDbContextFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
