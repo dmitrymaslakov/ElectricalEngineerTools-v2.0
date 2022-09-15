@@ -21,8 +21,7 @@ namespace LightingServices.App.CQRS.Luminaire.Queries.GetLuminaireDetails
             CancellationToken cancellationToken)
         {
             var entity = await _dbContext.LightingFixtures
-                .FirstOrDefaultAsync(lf =>
-                lf.Id == request.Id);
+                .FirstOrDefaultAsync(lf => lf.Id == request.Id);
 
             if (entity == null || entity.Id != request.Id)
             {

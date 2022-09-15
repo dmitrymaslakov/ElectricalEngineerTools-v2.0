@@ -39,15 +39,6 @@ namespace LightingServices.Api
             {
                 Log.Error(exception, exception.Message);
             }
-
-        }
-
-        public void Initialize()
-        {
-        }
-
-        public void Terminate()
-        {
         }
 
         [AcRnt.CommandMethod("pm", AcRnt.CommandFlags.Session)]
@@ -57,20 +48,30 @@ namespace LightingServices.Api
             lc.ControllerMethod();
         }
 
-        private IHostBuilder CreateHostBuilder(string[] args = null)
+        [AcRnt.CommandMethod("GetAll", AcRnt.CommandFlags.Session)]
+        //[AcRnt.JavaScriptCallback("GetAll")]
+        //public string GetAllLuminaire(string jsonArgs)
+        public void GetAll()
         {
-            /*return Host.CreateDefaultBuilder(args)
-                .AddApi()
-                .AddPersistence()
-                .AddApplication()
-                ;*/
-
-            var c = Host.CreateDefaultBuilder(args);
-            c.AddApi();
-            c.AddPersistence();
-            c.AddApplication();
-            return c;
+            var res = _host.Services.GetRequiredService<LuminaireController>().GetAll();
+            //return res;
         }
 
+
+        private IHostBuilder CreateHostBuilder(string[] args = null)
+        {
+            return Host.CreateDefaultBuilder(args)
+                .AddApi()
+                .AddPersistence()
+                .AddApplication();
+        }
+
+        public void Initialize()
+        {
+        }
+
+        public void Terminate()
+        {
+        }
     }
 }

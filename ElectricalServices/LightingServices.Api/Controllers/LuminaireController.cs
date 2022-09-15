@@ -30,10 +30,10 @@ namespace LightingServices.Api.Controllers
             }
         }
 
-        public async Task<LuminaireListVm> GetAll()
+        public LuminaireListVm GetAll()
         {
             var query = new GetLuminaireListQuery();
-            var vm = await _mediator.Send(query);
+            var vm = _mediator.Send(query).Result;
             return vm;
         }
 

@@ -103,7 +103,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="appsettings.json" />
+    <None Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ElectricalServices.Persistence\ElectricalServices.Persistence.csproj">

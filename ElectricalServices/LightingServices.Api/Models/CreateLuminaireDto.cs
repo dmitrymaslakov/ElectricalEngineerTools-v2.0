@@ -13,7 +13,7 @@ namespace LightingServices.Api.Models
     {
         public void Mapping(Profile profile)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

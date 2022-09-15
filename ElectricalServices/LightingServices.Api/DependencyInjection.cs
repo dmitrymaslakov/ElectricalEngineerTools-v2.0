@@ -27,7 +27,6 @@ namespace LightingServices.Api
                     .ReadFrom.Configuration(context.Configuration)
                     .Enrich.FromLogContext()
                     .WriteTo.Debug()
-                    .WriteTo.File("log/log.txt", rollingInterval: RollingInterval.Day)
                     .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}");
                 });
 
