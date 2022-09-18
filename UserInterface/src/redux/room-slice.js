@@ -25,6 +25,7 @@ const roomSlice = createSlice({
 })
 
 export const launchRoomDimensions = () => {
+
     return (dispatch) => {
         window['execAsync'](
             JSON.stringify({

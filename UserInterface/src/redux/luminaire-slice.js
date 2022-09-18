@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { luminaireApi } from '../api/api'
+
 
 const initialState = {
     luminaireParameters: [
@@ -16,6 +18,9 @@ const luminaireSlice = createSlice({
     name: 'luminaire',
     initialState,
     reducers: {
+        getAll(state, action){
+            
+        },
         addParameter(state, action){
             console.log(action.payload)
             // state.luminaireParameters.push({id:action.payload.id, name: action.payload.name})
@@ -26,5 +31,20 @@ const luminaireSlice = createSlice({
     }
 })
 
-export const {addParameter, addManufacturer} = luminaireSlice.actions
+export const getAllLuminaires = () =>{
+    return (dispatch) => {
+        luminaireApi.getAll(
+            {functionName: 'getAll', functionParams: 'args'},
+            resultAsString => {
+                const rv = JSON.parse(resultAsString).retValue
+                dispatch(getAll(rv))
+            },
+            resultAsString => {
+                console.log(JSON.parse(resultAsString))
+            }
+        )
+    }
+}
+
+export const {getAll, addParameter, addManufacturer} = luminaireSlice.actions
 export default luminaireSlice.reducer

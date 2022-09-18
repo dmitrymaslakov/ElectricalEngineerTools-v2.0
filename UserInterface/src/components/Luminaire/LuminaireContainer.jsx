@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import Luminaire from './Luminaire'
-import {addParameter, addManufacturer} from '../../redux/luminaire-slice'
+import {addParameter, addManufacturer, getAllLuminaires} from '../../redux/luminaire-slice'
 
 let mapStateToProps = (state) => {
     return {
@@ -8,6 +8,6 @@ let mapStateToProps = (state) => {
     }
 }
 
-const LuminaireContainer = connect(mapStateToProps, {addParameter, addManufacturer})(Luminaire)
+const LuminaireContainer = connect(mapStateToProps, {addParameter, addManufacturer, getAllLuminaires})(Luminaire)
 
 export default LuminaireContainer
