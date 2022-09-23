@@ -33,16 +33,9 @@ const luminaireSlice = createSlice({
 
 export const getAllLuminaires = () =>{
     return (dispatch) => {
-        luminaireApi.getAll(
-            {functionName: 'getAll', functionParams: 'args'},
-            resultAsString => {
-                const rv = JSON.parse(resultAsString).retValue
-                dispatch(getAll(rv))
-            },
-            resultAsString => {
-                console.log(JSON.parse(resultAsString))
-            }
-        )
+        const rv = luminaireApi.getAll()
+        //debugger
+        //dispatch(getAll(rv))
     }
 }
 

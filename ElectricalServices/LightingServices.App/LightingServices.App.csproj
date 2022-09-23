@@ -47,12 +47,15 @@
     <Compile Include="Common\Exceptions\NotFoundException.cs" />
     <Compile Include="Common\Mapping\AssemblyMappingProfile.cs" />
     <Compile Include="Common\Mapping\IMapWith.cs" />
+    <Compile Include="Common\Pading\IndexViewModel.cs" />
+    <Compile Include="Common\Pading\PageViewModel.cs" />
     <Compile Include="CQRS\Luminaire\Dto\CableDto.cs" />
     <Compile Include="CQRS\Luminaire\Commands\CreateLuminaire\CreateLuminaireCommand.cs" />
     <Compile Include="CQRS\Luminaire\Commands\CreateLuminaire\CreateLuminaireCommandHandler.cs" />
     <Compile Include="CQRS\Luminaire\Dto\DimensionsDto.cs" />
     <Compile Include="CQRS\Luminaire\Dto\LightSourceInfoDto.cs" />
     <Compile Include="CQRS\Luminaire\Dto\LuminaireDto.cs" />
+    <Compile Include="CQRS\Luminaire\Dto\LuminairesPage.cs" />
     <Compile Include="CQRS\Luminaire\Dto\MountingDto.cs" />
     <Compile Include="CQRS\Luminaire\Commands\DeleteLuminaire\DeleteLuminaireCommand.cs" />
     <Compile Include="CQRS\Luminaire\Commands\DeleteLuminaire\DeleteLuminaireCommandHandler.cs" />
@@ -64,7 +67,6 @@
     <Compile Include="CQRS\Luminaire\Queries\GetLuminaireList\GetLuminaireListQueryHandler.cs" />
     <Compile Include="CQRS\Luminaire\Queries\GetLuminaireList\GetLuminaireListQuery.cs" />
     <Compile Include="CQRS\Luminaire\Queries\GetLuminaireList\LuminaireListVm.cs" />
-    <Compile Include="CQRS\Luminaire\Queries\GetLuminaireList\LuminaireLookupDto.cs" />
     <Compile Include="DependencyInjection.cs" />
     <Compile Include="Interfaces\ILightingDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

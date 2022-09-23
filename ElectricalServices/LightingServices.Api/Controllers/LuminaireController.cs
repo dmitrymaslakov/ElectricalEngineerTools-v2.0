@@ -7,6 +7,7 @@ using LightingServices.App.Interfaces;
 using MediatR;
 using Newtonsoft.Json;
 using Serilog;
+using System;
 using System.Threading.Tasks;
 using AcRnt = Autodesk.AutoCAD.Runtime;
 
@@ -30,11 +31,22 @@ namespace LightingServices.Api.Controllers
             }
         }
 
-        public LuminaireListVm GetAll()
+        public string GetAll(int pageSize, int pageNumber)
         {
-            var query = new GetLuminaireListQuery();
+            var query = new GetLuminaireListQuery { Page = pageNumber, PageSize = pageSize };
             var vm = _mediator.Send(query).Result;
-            return vm;
+            var json = returnAsJSON(vm);
+            return json;
+        }
+
+        private string returnAsJSON(LuminaireListVm vm)
+        {
+            return JsonConvert.SerializeObject(
+                    new
+                    {
+                        retCode = 0,
+                        retValue = vm
+                    });
         }
 
         [AcRnt.JavaScriptCallback("Get")]

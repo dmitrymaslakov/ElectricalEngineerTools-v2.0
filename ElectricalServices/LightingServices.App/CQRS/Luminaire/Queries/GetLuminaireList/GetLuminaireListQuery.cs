@@ -9,6 +9,7 @@ namespace LightingServices.App.CQRS.Luminaire.Queries.GetLuminaireList
 {
     public class GetLuminaireListQuery : IRequest<LuminaireListVm>
     {
-        public int Id { get; set; }
+        public int Page{ get; set; }
+        public int PageSize{ get; set; }
     }
 }
