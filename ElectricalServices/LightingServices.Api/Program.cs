@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,28 +59,15 @@ namespace LightingServices.Api
             string res = "";
             try
             {
-                var json = stj.JsonSerializer.Deserialize<LuminairesPage>(jsonArgs);
-                //jsonArgs = @"{'Page':'1', 'PageSize': '5'}";
-                //jsonArgs = "{\"Page\":\"1\", \"PageSize\": \"5\"}";
-                jsonArgs = "{\\\"Page\\\":\\\"1\\\",\\\"PageSize\\\":\\\"5\\\"}";
-                LuminairesPage luminaire = JsonConvert.DeserializeObject<LuminairesPage>(jsonArgs);
-                //dynamic luminaire = JsonConvert.DeserializeObject(jsonArgs);
-                int.TryParse(luminaire.PageSize, out int pageSize);
-                int.TryParse(luminaire.Page, out int page);
+                jsonArgs = jsonArgs
+                    .Substring(jsonArgs.IndexOf("{"))
+                    .Substring(0, jsonArgs.LastIndexOf("}"));
 
-                /*var definition = new { Name = "" };
+                jsonArgs = Regex.Replace(jsonArgs, @"\\", "");
 
-                string json1 = @"{'Name':'James'}";
-                var customer1 = JsonConvert.DeserializeAnonymousType(json1, definition);
+                var luminaire = JsonConvert.DeserializeAnonymousType(jsonArgs, new { Page = 0, PageSize = 0 });
 
-                var luminaire = JsonConvert.DeserializeAnonymousType(jsonArgs, new { page = "", pageSize = "" });
-                int.TryParse(luminaire.pageSize, out int pageSize);
-                int.TryParse(luminaire.page, out int page);*/
-                /*var host = CreateHostBuilder().Build();
-                host.Start();*/
-                //var res1 = _host?.Services.GetRequiredService<LuminaireController>();
-                //res = _host.Services.GetRequiredService<LuminaireController>().GetAll(pageSize, page);
-                res = _host.Services.GetRequiredService<LuminaireController>().GetAll(pageSize, page);
+                res = _host.Services.GetRequiredService<LuminaireController>().GetAll(luminaire.PageSize, luminaire.Page);
                 return res;
             }
             catch (Exception exception)

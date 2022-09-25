@@ -27,6 +27,7 @@ namespace LightingServices.App.CQRS.Luminaire.Queries.GetLuminaireDetails
 
             var count = await luminaireQuery.CountAsync();
             var luminaires = await luminaireQuery
+                .OrderBy(l => l.Manufacturer)
                 .Skip((request.Page - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .ToListAsync(cancellationToken);

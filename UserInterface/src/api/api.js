@@ -7,8 +7,8 @@ export const luminaireApi = {
             JSON.stringify({
                 functionName: 'GetPage',
                 invokeAsCommand: false,
-                functionParams: JSON.stringify({ Page: '1', PageSize: '5' })
-                //functionParams: "{'Page':'1', 'PageSize': '5'}"
+                functionParams: JSON.stringify({ Page: 2, PageSize: 5 })
+                //functionParams: "{'Page':'2', 'PageSize': '5'}"
             }),
             resultAsString => {
                 //promise = JSON.parse(resultAsString).retValue
@@ -44,7 +44,7 @@ export const luminaireApi = {
                         promise.error(error.retCode, error.retErrorString)
                 }*/
             })
-
+            debugger
         return promise
     }
 }
