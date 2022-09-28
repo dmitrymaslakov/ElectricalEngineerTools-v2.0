@@ -10,6 +10,7 @@ import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
+import PaginationBasic from './Pagination'
 
 const CustomToggle = ({ children, eventKey }) => {
     const decoratedOnClick = useAccordionButton(eventKey)
@@ -47,12 +48,15 @@ function LuminaireParams(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Container>
+                <Container className="show-grid">
                     <Row>
                         <Col xs={12} md={8}>
                             <Accordion defaultActiveKey={props.luminaireParameters.map(p => p.id.toString())} alwaysOpen>
                                 {cards(props.luminaireParameters)}
                             </Accordion>
+                        </Col>
+                        <Col>
+                            <PaginationBasic></PaginationBasic>
                         </Col>
                     </Row>
                 </Container>
