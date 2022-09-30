@@ -10,18 +10,18 @@ import Container from 'react-bootstrap/Container'
 const App = () => {
 
   return (
-    <Container fluid='true' className='bg-info'>
+    /*<Container fluid className='bg-info'>
       <Row>
-        <Col xs={1} className='bg-primary'>1 of 2</Col>
+        <Col className='bg-primary'>1 of 2</Col>
         <Col>2 of 2</Col>
       </Row>
       <Row>
-        <Col className='bg-secondary'>1 of 3</Col>
+        <Col xs={1} className='bg-secondary'>1 of 3</Col>
         <Col>2 of 3</Col>
-        <Col>3 of 3</Col>
+        <Col className='bg-light'>3 of 3</Col>
       </Row>
-    </Container>
-    /*<Container fluid='true' className='border border-success mx-0 bg-info'>
+    </Container>*/
+    <Container fluid='true' className='border border-success mx-0 bg-info'>
       <Row>
         <Col sm={5}>
           <RoomContainer />
@@ -31,7 +31,7 @@ const App = () => {
           <Management></Management>
         </Col>
       </Row>
-    </Container>*/
+    </Container>
   )
 }
 
