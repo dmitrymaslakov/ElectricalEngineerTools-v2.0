@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Luminaire from './Luminaire'
-import { addParameter, addManufacturer, getLuminaires } from '../../redux/luminaire-slice'
+import { addParameter, addManufacturer, getLuminaires, setPickedLuminaire, setLuminousFlux, setMountingHeight } from '../../redux/luminaire-slice'
 
 class LuminaireContainer extends React.Component {
     componentDidMount() {
@@ -16,11 +16,18 @@ class LuminaireContainer extends React.Component {
         return <>
             <Luminaire
                 luminaires={this.props.luminaires}
+                //luminaire={this.props.luminaire}
+                pickedLuminaire={this.props.pickedLuminaire}
+                luminousFlux={this.props.luminousFlux}
+                mountingHeight={this.props.mountingHeight}
                 luminaireParameters={this.props.luminaireParameters}
                 pageSize={this.props.pageSize}
                 totalPages={this.props.totalPages}
                 currentPage={this.props.currentPage}
                 onPageChanged={this.onPageChanged}
+                onLuminairePicked={this.props.setPickedLuminaire}
+                onLuminousFluxChanged={this.props.setLuminousFlux}
+                onMountingHeightChanged={this.props.setMountingHeight}
             />
         </>
     }
@@ -29,6 +36,10 @@ class LuminaireContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         luminaires: state.luminaire.luminaires,
+        //luminaire: state.luminaire.luminaire,
+        pickedLuminaire: state.luminaire.pickedLuminaire,
+        luminousFlux: state.luminaire.luminousFlux,
+        mountingHeight: state.luminaire.mountingHeight,
         luminaireParameters: state.luminaire.luminaireParameters,
         pageSize: state.luminaire.pageSize,
         totalPages: state.luminaire.totalPages,
@@ -36,5 +47,5 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { addParameter, addManufacturer, getLuminaires })(LuminaireContainer)
+export default connect(mapStateToProps, { addParameter, addManufacturer, getLuminaires, setPickedLuminaire, setLuminousFlux, setMountingHeight })(LuminaireContainer)
 

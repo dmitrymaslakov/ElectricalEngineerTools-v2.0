@@ -1,5 +1,5 @@
 export const luminaireApi = {
-    getAll(currentPage = 1, pageSize = 5) {
+    getLuminaresPage(currentPage = 1, pageSize = 5) {
         let promise = new window.Autodesk.JavaScript.Promise()
         promise.then(s => s, e => e)
 

@@ -14,7 +14,21 @@ const initialState = {
         { id: 4, name: 'Количество ламп в светильнике', value: [1, 2, 3, 4] },
         { id: 5, name: 'Климатическое исполнение', value: ['УХЛ1', 'УХЛ2', 'УХЛ4', 'УХЛ5'] },
         { id: 6, name: 'Остальные параметры', value: ['Пылевлагозащищенный', 'Пожаробезопасный', 'Взрывобезопасный', 'БАП'] }
-    ]
+    ],
+    /*luminaire: {
+        id: 0,
+        brand: '',
+        lamp: '',
+        power: 0,
+        luminousFlux: 1000
+    },*/
+    pickedLuminaire: {
+        BPSU: false,
+        Brand: '',
+        LightSourceInfo: { LightSourceType: '', Power: '' }
+    },
+    luminousFlux: 1000,
+    mountingHeight: 2.5,
 }
 
 const luminaireSlice = createSlice({
@@ -23,6 +37,7 @@ const luminaireSlice = createSlice({
     reducers: {
         getPage(state, action) {
             //state.luminaires.push(...action.payload)
+            //debugger
             state.luminaires = action.payload
         },
         setTotalPages(state, action) {
@@ -30,6 +45,22 @@ const luminaireSlice = createSlice({
         },
         setCurrentPage(state, action) {
             state.currentPage = action.payload
+        },
+        /*setLuminaire(state, action) {
+            state.luminaire.id = action.payload.id
+            state.luminaire.brand = action.payload.brand
+            state.luminaire.lamp = action.payload.lamp
+            state.luminaire.power = action.payload.power
+        },*/
+        setPickedLuminaire(state, action) {
+            state.pickedLuminaire = action.payload
+        },
+        setLuminousFlux(state, action) {
+            state.luminousFlux = action.payload
+        },
+        setMountingHeight(state, action) {
+            debugger
+            state.mountingHeight = action.payload
         },
         addParameter(state, action) {
             console.log(action.payload)
@@ -43,15 +74,16 @@ const luminaireSlice = createSlice({
 
 export const getLuminaires = (currentPage, pageSize) => {
     return (dispatch) => {
-        luminaireApi.getAll(currentPage, pageSize)
+        luminaireApi.getLuminaresPage(currentPage, pageSize)
             .then(data => {
                 dispatch(getPage(data.Luminaires.Entities))
                 dispatch(setCurrentPage(data.Luminaires.PageViewModel.PageNumber))
-                dispatch(setTotalPages(data.Luminaires.PageViewModel.TotalPages))},
+                dispatch(setTotalPages(data.Luminaires.PageViewModel.TotalPages))
+            },
                 er => console.log(er)
             )
     }
 }
 
-export const { getPage, setCurrentPage, setTotalPages, addParameter, addManufacturer } = luminaireSlice.actions
+export const { getPage, setTotalPages, setCurrentPage, setPickedLuminaire, setLuminousFlux, setMountingHeight, addParameter, addManufacturer } = luminaireSlice.actions
 export default luminaireSlice.reducer

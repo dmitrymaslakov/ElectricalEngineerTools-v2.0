@@ -1,7 +1,7 @@
 import React from 'react'
 import RoomContainer from './components/Room/RoomContainer'
 import LuminaireContainer from './components/Luminaire/LuminaireContainer'
-import Management from './components/Management'
+import LaunchPanel from './components/LaunchPanel'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
@@ -28,7 +28,7 @@ const App = () => {
         </Col>
         <Col>
           <LuminaireContainer></LuminaireContainer>
-          <Management></Management>
+          <LaunchPanel></LaunchPanel>
         </Col>
       </Row>
     </Container>

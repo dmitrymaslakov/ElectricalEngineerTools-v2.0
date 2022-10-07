@@ -106,6 +106,21 @@
     <None Include="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="LdtIesFiles\כןמ12-2_18-910._ ¥1 IP54.ldt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="LdtIesFiles\כןמ12-2_18-910.« ¥1 IP54.ldt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="LdtIesFiles\כןמ12-2_24-910._ ¥1 IP54.ldt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="LdtIesFiles\כןמ12-4_18-910.c ¥1 IP54.ldt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="LdtIesFiles\כןמ12-4_18-910.« ¥1 IP54.ldt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ElectricalServices.Persistence\ElectricalServices.Persistence.csproj">
@@ -117,5 +132,6 @@
       <Name>LightingServices.App</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Modal from 'react-bootstrap/Modal'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -41,6 +42,17 @@ let cards = (params) => {
 }
 
 function LuminairePicking(props) {
+
+    const onLuminairePicked = (luminaire) => {
+        props.onLuminairePicked(
+            {
+                id: luminaire.Id,
+                brand: luminaire.Brand,
+                lamp: luminaire.LightSourceInfo.LightSourceType,
+                power: luminaire.LightSourceInfo.Power,
+            })
+    }
+
     return (
         <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
             <Modal.Header closeButton>
@@ -63,9 +75,21 @@ function LuminairePicking(props) {
                                 currentPage={props.currentPage}
                                 onPageChanged={props.onPageChanged}
                             />
-                            <ListGroup>
-                                {props.luminaires.map(l => <ListGroup.Item key={l.Id}>{l.Brand}</ListGroup.Item>)}
+                            <ListGroup variant='flush'>
+                                {
+                                    props.luminaires.map(l =>
+                                        <ListGroup.Item key={l.Id}>
+                                            <InputGroup>
+                                                <InputGroup.Radio id={l.Id} name='listGroupRadio' onClick={() => props.onLuminairePicked(l)} />
+                                                <label className='fs-5 mb-3 ms-3' for={l.Id} onClick={() => props.onLuminairePicked(l)}>{l.Brand}</label>
+                                            </InputGroup>
+                                        </ListGroup.Item>)
+                                }
                             </ListGroup>
+                            <ButtonGroup horizontal className='my-3'>
+                                <Button variant='secondary'>Детали</Button>
+                                <Button variant='secondary'>Добавить в базу</Button>
+                            </ButtonGroup>
                         </Col>
                     </Row>
                 </Container>
@@ -77,30 +101,42 @@ function LuminairePicking(props) {
     )
 }
 
+
 const Luminaire = (props) => {
+    const newLuminousFlux = React.createRef()
+    const newMountingHeight = React.createRef()
+
+    const onLuminousFluxChange = () => {
+        const luminousFlux = newLuminousFlux.current.value
+        props.onLuminousFluxChanged(luminousFlux)
+    }
+
+    const onMountingHeightChanged = () => {
+        const mountingHeight = newMountingHeight.current.value
+        props.onMountingHeightChanged(mountingHeight)
+    }
     const [modalShow, setModalShow] = useState(false)
     const [fullscreen, setFullscreen] = useState(true)
 
     return (
         <>
-            <label className='fs-5'>Тип светильника</label>
+            <label className='fs-5'>Тип светильника {props.pickedLuminaire.brand}</label>
             <br />
-            <Button variant='secondary' className='my-3' onClick={() => props.getLuminaires()}>GetAll</Button>
             <Button variant='secondary' className='my-3' onClick={() => setModalShow(true)}>Выбрать светильник</Button>
             <LuminairePicking {...props} show={modalShow} fullscreen={fullscreen} onHide={() => setModalShow(false)} />
             <br />
-            <label className='fs-5 mb-3'>Лампа</label>
+            <label className='fs-5 mb-3'>Лампа {props.pickedLuminaire.LightSourceInfo.LightSourceType}</label>
             <br />
-            <label className='fs-5 mb-3'>Мощность, Вт</label>
+            <label className='fs-5 mb-3'>Мощность, {props.pickedLuminaire.LightSourceInfo.Power} Вт</label>
             <br />
             <InputGroup>
                 <InputGroup.Text>Световой поток, лм</InputGroup.Text>
-                <FormControl />
+                <FormControl value={props.luminousFlux} ref={newLuminousFlux} onChange={onLuminousFluxChange} />
             </InputGroup>
             <br />
             <InputGroup>
                 <InputGroup.Text>Высота установки, м</InputGroup.Text>
-                <FormControl />
+                <FormControl value={props.mountingHeight} ref={newMountingHeight} onChange={onMountingHeightChanged} />
             </InputGroup>
         </>
     )
