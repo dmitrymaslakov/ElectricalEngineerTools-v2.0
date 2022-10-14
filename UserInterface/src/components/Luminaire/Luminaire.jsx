@@ -13,6 +13,8 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import PaginationBasic from './Pagination'
 import ListGroup from 'react-bootstrap/ListGroup'
+import LuminaireDetails from './LuminaireDetails'
+import AddToDb from './AddToDb'
 
 const CustomToggle = ({ children, eventKey }) => {
     const decoratedOnClick = useAccordionButton(eventKey)
@@ -42,16 +44,9 @@ let cards = (params) => {
 }
 
 function LuminairePicking(props) {
-
-    const onLuminairePicked = (luminaire) => {
-        props.onLuminairePicked(
-            {
-                id: luminaire.Id,
-                brand: luminaire.Brand,
-                lamp: luminaire.LightSourceInfo.LightSourceType,
-                power: luminaire.LightSourceInfo.Power,
-            })
-    }
+    const [detailsModal, setDetailsModal] = useState(false)
+    const [addToDbModal, setAddToDbModal] = useState(false)
+    const [fullscreen, setFullscreen] = useState(true)
 
     return (
         <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
@@ -87,9 +82,10 @@ function LuminairePicking(props) {
                                 }
                             </ListGroup>
                             <ButtonGroup horizontal className='my-3'>
-                                <Button variant='secondary'>Детали</Button>
-                                <Button variant='secondary'>Добавить в базу</Button>
+                                <Button variant='secondary' onClick={() => setDetailsModal(true)}>Детали</Button>
+                                <Button variant='secondary' onClick={() => setAddToDbModal(true)}>Добавить в базу</Button>
                             </ButtonGroup>
+                            <LuminaireDetails luminaire={props.pickedLuminaire} show={detailsModal} fullscreen={fullscreen} onHide={() => setDetailsModal(false)} />
                         </Col>
                     </Row>
                 </Container>
@@ -125,9 +121,9 @@ const Luminaire = (props) => {
             <Button variant='secondary' className='my-3' onClick={() => setModalShow(true)}>Выбрать светильник</Button>
             <LuminairePicking {...props} show={modalShow} fullscreen={fullscreen} onHide={() => setModalShow(false)} />
             <br />
-            <label className='fs-5 mb-3'>Лампа {props.pickedLuminaire.LightSourceInfo.LightSourceType}</label>
+            <label className='fs-5 mb-3'>Лампа {props.pickedLuminaire.LightSourceInfo === undefined ? '' : props.pickedLuminaire.LightSourceInfo.LightSourceType}</label>
             <br />
-            <label className='fs-5 mb-3'>Мощность, {props.pickedLuminaire.LightSourceInfo.Power} Вт</label>
+            <label className='fs-5 mb-3'>Мощность, {props.pickedLuminaire.LightSourceInfo === undefined ? '' : props.pickedLuminaire.LightSourceInfo.Power} Вт</label>
             <br />
             <InputGroup>
                 <InputGroup.Text>Световой поток, лм</InputGroup.Text>

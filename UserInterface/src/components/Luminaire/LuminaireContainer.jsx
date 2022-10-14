@@ -1,7 +1,29 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Luminaire from './Luminaire'
-import { addParameter, addManufacturer, getLuminaires, setPickedLuminaire, setLuminousFlux, setMountingHeight } from '../../redux/luminaire-slice'
+import {
+    addParameter,
+    addManufacturer,
+    getLuminaires,
+    setPickedLuminaire,
+    setLuminousFlux,
+    setManufacturer,
+    setBrand,
+    setLightSourceInfo,
+    setTechnicalSpecifications,
+    setMounting,
+    setClimateApplication,
+    setDiffuserMaterial,
+    setIP,
+    setEquipmentClass,
+    setIsFireproof,
+    setIsExplosionProof,
+    setBPSU,
+    setDimensions,
+    setLdtIesFile,
+    setCable,
+    setMountingHeight
+} from '../../redux/luminaire-slice'
 
 class LuminaireContainer extends React.Component {
     componentDidMount() {
@@ -16,7 +38,6 @@ class LuminaireContainer extends React.Component {
         return <>
             <Luminaire
                 luminaires={this.props.luminaires}
-                //luminaire={this.props.luminaire}
                 pickedLuminaire={this.props.pickedLuminaire}
                 luminousFlux={this.props.luminousFlux}
                 mountingHeight={this.props.mountingHeight}
@@ -28,6 +49,22 @@ class LuminaireContainer extends React.Component {
                 onLuminairePicked={this.props.setPickedLuminaire}
                 onLuminousFluxChanged={this.props.setLuminousFlux}
                 onMountingHeightChanged={this.props.setMountingHeight}
+
+                onManufacturerChanged={this.props.setManufacturer}
+                onBrandChanged={this.props.setBrand}
+                onLightSourceInfoChanged={this.props.setLightSourceInfo}
+                onTechnicalSpecificationsChanged={this.props.setTechnicalSpecifications}
+                onMountingChanged={this.props.setMounting}
+                onClimateApplicationChanged={this.props.setClimateApplication}
+                onDiffuserMaterialReacChanged={this.props.setDiffuserMaterial}
+                onIPChanged={this.props.setIP}
+                onEquipmentClassChanged={this.props.setEquipmentClass}
+                onIsFireproofChanged={this.props.setIsFireproof}
+                onIsExplosionProofReacChanged={this.props.setIsExplosionProof}
+                onBPSUChanged={this.props.setBPSU}
+                onDimensionsChanged={this.props.setDimensions}
+                onLdtIesFileChanged={this.props.setLdtIesFile}
+                onCableChanged={this.props.setCable}
             />
         </>
     }
@@ -36,7 +73,6 @@ class LuminaireContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         luminaires: state.luminaire.luminaires,
-        //luminaire: state.luminaire.luminaire,
         pickedLuminaire: state.luminaire.pickedLuminaire,
         luminousFlux: state.luminaire.luminousFlux,
         mountingHeight: state.luminaire.mountingHeight,
@@ -47,5 +83,27 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { addParameter, addManufacturer, getLuminaires, setPickedLuminaire, setLuminousFlux, setMountingHeight })(LuminaireContainer)
+export default connect(mapStateToProps, {
+    addParameter,
+    addManufacturer,
+    getLuminaires,
+    setPickedLuminaire,
+    setLuminousFlux,
+    setManufacturer,
+    setBrand,
+    setLightSourceInfo,
+    setTechnicalSpecifications,
+    setMounting,
+    setClimateApplication,
+    setDiffuserMaterial,
+    setIP,
+    setEquipmentClass,
+    setIsFireproof,
+    setIsExplosionProof,
+    setBPSU,
+    setDimensions,
+    setLdtIesFile,
+    setCable,
+    setMountingHeight
+})(LuminaireContainer)
 

@@ -9,23 +9,29 @@ const initialState = {
     luminaireParameters: [
         { id: 0, name: 'Производитель', value: ['SVS-Lighting', 'Lighting Technologies', 'ЗАО Белинтегра'] },
         { id: 1, name: 'Форма', value: ['Прямоугольный', 'Квадрат'] },
-        { id: 2, name: 'Способ монтажа', value: ['Потолочный', 'Встраиваемый в Armstrong', 'Встраиваемый в гипсокартон', 'Подвесной'] },
+        { id: 2, name: 'Тип монтажа', value: ['Потолочный', 'Встраиваемый в Armstrong', 'Встраиваемый в гипсокартон', 'Подвесной'] },
         { id: 3, name: 'Источник света', value: ['Светодиодный модуль', 'Светодиодная лампа', 'Люминесцентная лампа', 'Лампа накаливания'] },
         { id: 4, name: 'Количество ламп в светильнике', value: [1, 2, 3, 4] },
         { id: 5, name: 'Климатическое исполнение', value: ['УХЛ1', 'УХЛ2', 'УХЛ4', 'УХЛ5'] },
         { id: 6, name: 'Остальные параметры', value: ['Пылевлагозащищенный', 'Пожаробезопасный', 'Взрывобезопасный', 'БАП'] }
     ],
-    /*luminaire: {
-        id: 0,
-        brand: '',
-        lamp: '',
-        power: 0,
-        luminousFlux: 1000
-    },*/
     pickedLuminaire: {
-        BPSU: false,
-        Brand: '',
-        LightSourceInfo: { LightSourceType: '', Power: '' }
+        /*Id: -1,
+        Manufacturer: { name: 'Производитель', value: '' },
+        Brand: {name: 'Марка', value: ''},
+        LightSourceInfo: { LightSourceType: { name: 'Источник света', value: '' }, Power: { name: 'Мощность', value: '' } },
+        TechnicalSpecifications: {name: 'Технические условия', value: ''},
+        Mounting: { MountingType: {name: 'Тип монтажа', value: ''}, MountingSubtype: {name: 'Способ монтажа', value: ''} },
+        ClimateApplication: {name: 'Климатическое исполнение', value: ''},
+        DiffuserMaterial: {name: 'Рассеиватель', value: ''},
+        IP: {name: 'Степень защиты', value: ''},
+        EquipmentClass: {name: 'Класс защиты электрооборудования', value: ''},
+        IsFireproof: {name: 'Пожаробезопасность', value: false},
+        IsExplosionProof: {name: 'Взрывобезопасность', value: false},
+        BPSU: {name: 'БАП', value: false},
+        Dimensions: { Length: {name: 'Длина', value: ''}, Width: {name: 'Ширина', value: ''}, Diameter: {name: 'Диаметр', value: ''} },
+        LdtIesFile: {name: 'Файл формата Ldt или Ies', value: ''},
+        Cable: { Brand: {name: 'Марка', value: ''}, CoresNumber: {name: 'Число жил', value: -1}, Section: {name: 'Сечение', value: ''} }*/
     },
     luminousFlux: 1000,
     mountingHeight: 2.5,
@@ -54,12 +60,32 @@ const luminaireSlice = createSlice({
         },*/
         setPickedLuminaire(state, action) {
             state.pickedLuminaire = action.payload
+            /*state.pickedLuminaire.Id = action.payload.Id
+            state.pickedLuminaire.Brand.value = action.payload.Brand
+            state.pickedLuminaire.LightSourceInfo.LightSourceType.value = action.payload.LightSourceInfo.LightSourceType
+            state.pickedLuminaire.LightSourceInfo.Power.value = action.payload.LightSourceInfo.Power
+            state.pickedLuminaire.TechnicalSpecifications.value = action.payload.TechnicalSpecifications
+            state.pickedLuminaire.Mounting.MountingType.value = action.payload.MountingType
+            state.pickedLuminaire.Mounting.MountingSubtype.value = action.payload.MountingSubtype
+            state.pickedLuminaire.ClimateApplication.value = action.payload.ClimateApplication
+            state.pickedLuminaire.DiffuserMaterial.value = action.payload.DiffuserMaterial
+            state.pickedLuminaire.IP.value = action.payload.IP
+            state.pickedLuminaire.EquipmentClass.value = action.payload.EquipmentClass
+            state.pickedLuminaire.IsFireproof.value = action.payload.IsFireproof
+            state.pickedLuminaire.IsExplosionProof.value = action.payload.IsExplosionProof
+            state.pickedLuminaire.BPSU.value = action.payload.BPSU
+            state.pickedLuminaire.Dimensions.Length.value = action.payload.Dimensions.Length
+            state.pickedLuminaire.Dimensions.Width.value = action.payload.Dimensions.Width
+            state.pickedLuminaire.Dimensions.Diameter.value = action.payload.Dimensions.Diameter
+            state.pickedLuminaire.LdtIesFile.value = action.payload.LdtIesFile
+            state.pickedLuminaire.Cable.Brand.value = action.payload.Cable.Brand
+            state.pickedLuminaire.Cable.CoresNumber.value = action.payload.Cable.CoresNumber
+            state.pickedLuminaire.Cable.Section.value = action.payload.Cable.Section*/
         },
         setLuminousFlux(state, action) {
             state.luminousFlux = action.payload
         },
         setMountingHeight(state, action) {
-            debugger
             state.mountingHeight = action.payload
         },
         addParameter(state, action) {
