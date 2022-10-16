@@ -2,8 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Luminaire from './Luminaire'
 import {
-    addParameter,
-    addManufacturer,
     getLuminaires,
     setPickedLuminaire,
     setLuminousFlux,
@@ -31,7 +29,11 @@ class LuminaireContainer extends React.Component {
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.getLuminaires(pageNumber, this.props.pageSize);
+        this.props.getLuminaires(pageNumber, this.props.pageSize)
+    }
+
+    onLuminaireDetailsChanged = () => {
+        this.props.getLuminaires(pageNumber, this.props.pageSize)
     }
 
     render() {
@@ -46,6 +48,7 @@ class LuminaireContainer extends React.Component {
                 totalPages={this.props.totalPages}
                 currentPage={this.props.currentPage}
                 onPageChanged={this.onPageChanged}
+                onLuminaireDetailsChanged={this.onLuminaireDetailsChanged}
                 onLuminairePicked={this.props.setPickedLuminaire}
                 onLuminousFluxChanged={this.props.setLuminousFlux}
                 onMountingHeightChanged={this.props.setMountingHeight}
@@ -60,7 +63,7 @@ class LuminaireContainer extends React.Component {
                 onIPChanged={this.props.setIP}
                 onEquipmentClassChanged={this.props.setEquipmentClass}
                 onIsFireproofChanged={this.props.setIsFireproof}
-                onIsExplosionProofReacChanged={this.props.setIsExplosionProof}
+                onIsExplosionProofChanged={this.props.setIsExplosionProof}
                 onBPSUChanged={this.props.setBPSU}
                 onDimensionsChanged={this.props.setDimensions}
                 onLdtIesFileChanged={this.props.setLdtIesFile}
@@ -84,8 +87,6 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    addParameter,
-    addManufacturer,
     getLuminaires,
     setPickedLuminaire,
     setLuminousFlux,

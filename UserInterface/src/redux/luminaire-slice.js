@@ -15,24 +15,8 @@ const initialState = {
         { id: 5, name: 'Климатическое исполнение', value: ['УХЛ1', 'УХЛ2', 'УХЛ4', 'УХЛ5'] },
         { id: 6, name: 'Остальные параметры', value: ['Пылевлагозащищенный', 'Пожаробезопасный', 'Взрывобезопасный', 'БАП'] }
     ],
-    pickedLuminaire: {
-        /*Id: -1,
-        Manufacturer: { name: 'Производитель', value: '' },
-        Brand: {name: 'Марка', value: ''},
-        LightSourceInfo: { LightSourceType: { name: 'Источник света', value: '' }, Power: { name: 'Мощность', value: '' } },
-        TechnicalSpecifications: {name: 'Технические условия', value: ''},
-        Mounting: { MountingType: {name: 'Тип монтажа', value: ''}, MountingSubtype: {name: 'Способ монтажа', value: ''} },
-        ClimateApplication: {name: 'Климатическое исполнение', value: ''},
-        DiffuserMaterial: {name: 'Рассеиватель', value: ''},
-        IP: {name: 'Степень защиты', value: ''},
-        EquipmentClass: {name: 'Класс защиты электрооборудования', value: ''},
-        IsFireproof: {name: 'Пожаробезопасность', value: false},
-        IsExplosionProof: {name: 'Взрывобезопасность', value: false},
-        BPSU: {name: 'БАП', value: false},
-        Dimensions: { Length: {name: 'Длина', value: ''}, Width: {name: 'Ширина', value: ''}, Diameter: {name: 'Диаметр', value: ''} },
-        LdtIesFile: {name: 'Файл формата Ldt или Ies', value: ''},
-        Cable: { Brand: {name: 'Марка', value: ''}, CoresNumber: {name: 'Число жил', value: -1}, Section: {name: 'Сечение', value: ''} }*/
-    },
+    pickedLuminaire: {},
+    changedLuminaireParameters: {},
     luminousFlux: 1000,
     mountingHeight: 2.5,
 }
@@ -42,8 +26,6 @@ const luminaireSlice = createSlice({
     initialState,
     reducers: {
         getPage(state, action) {
-            //state.luminaires.push(...action.payload)
-            //debugger
             state.luminaires = action.payload
         },
         setTotalPages(state, action) {
@@ -52,49 +34,87 @@ const luminaireSlice = createSlice({
         setCurrentPage(state, action) {
             state.currentPage = action.payload
         },
-        /*setLuminaire(state, action) {
-            state.luminaire.id = action.payload.id
-            state.luminaire.brand = action.payload.brand
-            state.luminaire.lamp = action.payload.lamp
-            state.luminaire.power = action.payload.power
-        },*/
         setPickedLuminaire(state, action) {
             state.pickedLuminaire = action.payload
-            /*state.pickedLuminaire.Id = action.payload.Id
-            state.pickedLuminaire.Brand.value = action.payload.Brand
-            state.pickedLuminaire.LightSourceInfo.LightSourceType.value = action.payload.LightSourceInfo.LightSourceType
-            state.pickedLuminaire.LightSourceInfo.Power.value = action.payload.LightSourceInfo.Power
-            state.pickedLuminaire.TechnicalSpecifications.value = action.payload.TechnicalSpecifications
-            state.pickedLuminaire.Mounting.MountingType.value = action.payload.MountingType
-            state.pickedLuminaire.Mounting.MountingSubtype.value = action.payload.MountingSubtype
-            state.pickedLuminaire.ClimateApplication.value = action.payload.ClimateApplication
-            state.pickedLuminaire.DiffuserMaterial.value = action.payload.DiffuserMaterial
-            state.pickedLuminaire.IP.value = action.payload.IP
-            state.pickedLuminaire.EquipmentClass.value = action.payload.EquipmentClass
-            state.pickedLuminaire.IsFireproof.value = action.payload.IsFireproof
-            state.pickedLuminaire.IsExplosionProof.value = action.payload.IsExplosionProof
-            state.pickedLuminaire.BPSU.value = action.payload.BPSU
-            state.pickedLuminaire.Dimensions.Length.value = action.payload.Dimensions.Length
-            state.pickedLuminaire.Dimensions.Width.value = action.payload.Dimensions.Width
-            state.pickedLuminaire.Dimensions.Diameter.value = action.payload.Dimensions.Diameter
-            state.pickedLuminaire.LdtIesFile.value = action.payload.LdtIesFile
-            state.pickedLuminaire.Cable.Brand.value = action.payload.Cable.Brand
-            state.pickedLuminaire.Cable.CoresNumber.value = action.payload.Cable.CoresNumber
-            state.pickedLuminaire.Cable.Section.value = action.payload.Cable.Section*/
         },
-        setLuminousFlux(state, action) {
-            state.luminousFlux = action.payload
+        setLuminousFlux(state, action) { state.luminousFlux = action.payload },
+        setManufacturer(state, action) {
+            state.pickedLuminaire.Manufacturer = action.payload
+            state.changedLuminaireParameters.Id = state.pickedLuminaire.Id
+            state.changedLuminaireParameters.Manufacturer = state.pickedLuminaire.Manufacturer
         },
-        setMountingHeight(state, action) {
-            state.mountingHeight = action.payload
+        setBrand(state, action) {
+            state.pickedLuminaire.Brand = action.payload
+            state.changedLuminaireParameters.Id = state.pickedLuminaire.Id
+            state.changedLuminaireParameters.Brand = state.pickedLuminaire.Brand
         },
-        addParameter(state, action) {
-            console.log(action.payload)
-            // state.luminaireParameters.push({id:action.payload.id, name: action.payload.name})
+        setLightSourceInfo(state, action) {
+            state.pickedLuminaire.LightSourceInfo = action.payload
+            state.changedLuminaireParameters.Id = state.pickedLuminaire.Id
+            state.changedLuminaireParameters.LightSourceInfo = state.pickedLuminaire.LightSourceInfo
         },
-        addManufacturer(state, action) {
-            //state.manufacturers.push({id:action.payload.id, name: action.payload.name})
-        }
+        setTechnicalSpecifications(state, action) {
+            state.pickedLuminaire.TechnicalSpecifications = action.payload
+            state.changedLuminaireParameters.Id = state.pickedLuminaire.Id
+            state.changedLuminaireParameters.TechnicalSpecifications = state.pickedLuminaire.TechnicalSpecifications
+        },
+        setMounting(state, action) {
+            state.pickedLuminaire.Mounting = action.payload
+            state.changedLuminaireParameters.Id = state.pickedLuminaire.Id
+            state.changedLuminaireParameters.Mounting = state.pickedLuminaire.Mounting
+        },
+        setClimateApplication(state, action) {
+            state.pickedLuminaire.ClimateApplication = action.payload
+            state.changedLuminaireParameters.Id = state.pickedLuminaire.Id
+            state.changedLuminaireParameters.ClimateApplication = state.pickedLuminaire.ClimateApplication
+        },
+        setDiffuserMaterial(state, action) {
+            state.pickedLuminaire.DiffuserMaterial = action.payload
+            state.changedLuminaireParameters.Id = state.pickedLuminaire.Id
+            state.changedLuminaireParameters.DiffuserMaterial = state.pickedLuminaire.DiffuserMaterial
+        },
+        setIP(state, action) {
+            state.pickedLuminaire.IP = action.payload
+            state.changedLuminaireParameters.Id = state.pickedLuminaire.Id
+            state.changedLuminaireParameters.IP = state.pickedLuminaire.IP
+        },
+        setEquipmentClass(state, action) {
+            state.pickedLuminaire.EquipmentClass = action.payload
+            state.changedLuminaireParameters.Id = state.pickedLuminaire.Id
+            state.changedLuminaireParameters.EquipmentClass = state.pickedLuminaire.EquipmentClass
+        },
+        setIsFireproof(state, action) {
+            state.pickedLuminaire.IsFireproof = action.payload
+            state.changedLuminaireParameters.Id = state.pickedLuminaire.Id
+            state.changedLuminaireParameters.IsFireproof = state.pickedLuminaire.IsFireproof
+        },
+        setIsExplosionProof(state, action) {
+            state.pickedLuminaire.IsExplosionProof = action.payload
+            state.changedLuminaireParameters.Id = state.pickedLuminaire.Id
+            state.changedLuminaireParameters.IsExplosionProof = state.pickedLuminaire.IsExplosionProof
+        },
+        setBPSU(state, action) {
+            state.pickedLuminaire.BPSU = action.payload
+            state.changedLuminaireParameters.Id = state.pickedLuminaire.Id
+            state.changedLuminaireParameters.BPSU = state.pickedLuminaire.BPSU
+        },
+        setDimensions(state, action) {
+            state.pickedLuminaire.Dimensions = action.payload
+            state.changedLuminaireParameters.Id = state.pickedLuminaire.Id
+            state.changedLuminaireParameters.Dimensions = state.pickedLuminaire.Dimensions
+        },
+        setLdtIesFile(state, action) {
+            state.pickedLuminaire.LdtIesFile = action.payload
+            state.changedLuminaireParameters.Id = state.pickedLuminaire.Id
+            state.changedLuminaireParameters.LdtIesFile = state.pickedLuminaire.LdtIesFile
+        },
+        setCable(state, action) {
+            state.pickedLuminaire.Cable = action.payload
+            state.changedLuminaireParameters.Id = state.pickedLuminaire.Id
+            state.changedLuminaireParameters.Cable = state.pickedLuminaire.Cable
+        },
+
+        setMountingHeight(state, action) { state.mountingHeight = action.payload },
     }
 })
 
@@ -111,5 +131,40 @@ export const getLuminaires = (currentPage, pageSize) => {
     }
 }
 
-export const { getPage, setTotalPages, setCurrentPage, setPickedLuminaire, setLuminousFlux, setMountingHeight, addParameter, addManufacturer } = luminaireSlice.actions
+export const postChangedLuminaire = () => {
+    return (dispatch) => {
+        if()
+        luminaireApi.getLuminaresPage(currentPage, pageSize)
+            .then(data => {
+                dispatch(getPage(data.Luminaires.Entities))
+                dispatch(setCurrentPage(data.Luminaires.PageViewModel.PageNumber))
+                dispatch(setTotalPages(data.Luminaires.PageViewModel.TotalPages))
+            },
+                er => console.log(er)
+            )
+    }
+}
+
+export const {
+    getPage,
+    setTotalPages,
+    setCurrentPage,
+    setPickedLuminaire,
+    setLuminousFlux,
+    setManufacturer,
+    setBrand,
+    setLightSourceInfo,
+    setTechnicalSpecifications,
+    setMounting,
+    setClimateApplication,
+    setDiffuserMaterial,
+    setIP,
+    setEquipmentClass,
+    setIsFireproof,
+    setIsExplosionProof,
+    setBPSU,
+    setDimensions,
+    setLdtIesFile,
+    setCable,
+    setMountingHeight} = luminaireSlice.actions
 export default luminaireSlice.reducer

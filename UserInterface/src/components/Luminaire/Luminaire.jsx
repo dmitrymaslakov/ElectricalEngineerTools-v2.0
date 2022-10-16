@@ -85,7 +85,7 @@ function LuminairePicking(props) {
                                 <Button variant='secondary' onClick={() => setDetailsModal(true)}>Детали</Button>
                                 <Button variant='secondary' onClick={() => setAddToDbModal(true)}>Добавить в базу</Button>
                             </ButtonGroup>
-                            <LuminaireDetails luminaire={props.pickedLuminaire} show={detailsModal} fullscreen={fullscreen} onHide={() => setDetailsModal(false)} />
+                            <LuminaireDetails {...props} show={detailsModal} fullscreen={fullscreen} onHide={() => setDetailsModal(false)} />
                         </Col>
                     </Row>
                 </Container>
