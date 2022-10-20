@@ -77,6 +77,31 @@ namespace LightingServices.Api
             }
         }
 
+        [AcRnt.JavaScriptCallback("UpdateLuminaire")]
+        public string UpdateLuminaire(string jsonArgs)
+        {
+            string res = "";
+            try
+            {
+                jsonArgs = jsonArgs
+                    .Substring(jsonArgs.IndexOf("{"))
+                    .Substring(0, jsonArgs.LastIndexOf("}"));
+
+                jsonArgs = Regex.Replace(jsonArgs, @"\\", "");
+
+                var luminaire = JsonConvert.DeserializeAnonymousType(jsonArgs, new { Page = 0, PageSize = 0 });
+
+                /*res = _host.Services.GetRequiredService<LuminaireController>().GetAll(luminaire.PageSize, luminaire.Page);
+                return res;*/
+                return "";
+            }
+            catch (Exception exception)
+            {
+                Log.Error(exception, exception.Message);
+                return res;
+            }
+        }
+
 
         private IHostBuilder CreateHostBuilder(string[] args = null)
         {

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Luminaire from './Luminaire'
 import {
     getLuminaires,
+    postChangedLuminaire,
     setPickedLuminaire,
     setLuminousFlux,
     setManufacturer,
@@ -33,7 +34,13 @@ class LuminaireContainer extends React.Component {
     }
 
     onLuminaireDetailsChanged = () => {
-        this.props.getLuminaires(pageNumber, this.props.pageSize)
+        console.log('out')
+        console.log(this.props.changedLuminaireParameters)
+
+        if (JSON.stringify(this.props.changedLuminaireParameters) !== '{}') {
+            console.log('in')
+            this.props.postChangedLuminaire(this.props.changedLuminaireParameters)
+        }
     }
 
     render() {
@@ -59,7 +66,7 @@ class LuminaireContainer extends React.Component {
                 onTechnicalSpecificationsChanged={this.props.setTechnicalSpecifications}
                 onMountingChanged={this.props.setMounting}
                 onClimateApplicationChanged={this.props.setClimateApplication}
-                onDiffuserMaterialReacChanged={this.props.setDiffuserMaterial}
+                onDiffuserMaterialChanged={this.props.setDiffuserMaterial}
                 onIPChanged={this.props.setIP}
                 onEquipmentClassChanged={this.props.setEquipmentClass}
                 onIsFireproofChanged={this.props.setIsFireproof}
@@ -77,6 +84,7 @@ let mapStateToProps = (state) => {
     return {
         luminaires: state.luminaire.luminaires,
         pickedLuminaire: state.luminaire.pickedLuminaire,
+        changedLuminaireParameters: state.luminaire.changedLuminaireParameters,
         luminousFlux: state.luminaire.luminousFlux,
         mountingHeight: state.luminaire.mountingHeight,
         luminaireParameters: state.luminaire.luminaireParameters,
@@ -88,6 +96,7 @@ let mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     getLuminaires,
+    postChangedLuminaire,
     setPickedLuminaire,
     setLuminousFlux,
     setManufacturer,

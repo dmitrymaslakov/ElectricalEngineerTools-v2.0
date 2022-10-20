@@ -30,9 +30,9 @@ const LuminaireDetails = (props) => {
     const newSection = React.createRef()
 
     const onManufacturerChanged = () => {
-        console.log(props.pickedLuminaire)
         const manufacturer = newManufacturer.current.value
         props.onManufacturerChanged(manufacturer)
+        //console.log(props.changedLuminaireParameters)
     }
     const onBrandChanged = () => {
         const brand = newBrand.current.value

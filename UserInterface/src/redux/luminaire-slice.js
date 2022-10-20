@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { luminaireApi } from '../api/api'
 
 const initialState = {
@@ -115,7 +115,7 @@ const luminaireSlice = createSlice({
         },
 
         setMountingHeight(state, action) { state.mountingHeight = action.payload },
-    }
+    },
 })
 
 export const getLuminaires = (currentPage, pageSize) => {
@@ -131,14 +131,11 @@ export const getLuminaires = (currentPage, pageSize) => {
     }
 }
 
-export const postChangedLuminaire = () => {
+export const postChangedLuminaire = (luminaire) => {
     return (dispatch) => {
-        if()
-        luminaireApi.getLuminaresPage(currentPage, pageSize)
+        luminaireApi.postLuminare(luminaire)
             .then(data => {
-                dispatch(getPage(data.Luminaires.Entities))
-                dispatch(setCurrentPage(data.Luminaires.PageViewModel.PageNumber))
-                dispatch(setTotalPages(data.Luminaires.PageViewModel.TotalPages))
+                console.log(data)
             },
                 er => console.log(er)
             )
@@ -166,5 +163,5 @@ export const {
     setDimensions,
     setLdtIesFile,
     setCable,
-    setMountingHeight} = luminaireSlice.actions
+    setMountingHeight } = luminaireSlice.actions
 export default luminaireSlice.reducer
