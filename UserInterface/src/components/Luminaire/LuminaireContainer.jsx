@@ -34,17 +34,14 @@ class LuminaireContainer extends React.Component {
     }
 
     onLuminaireDetailsChanged = () => {
-        console.log('out')
-        console.log(this.props.changedLuminaireParameters)
-
         if (JSON.stringify(this.props.changedLuminaireParameters) !== '{}') {
-            console.log('in')
             this.props.postChangedLuminaire(this.props.changedLuminaireParameters)
         }
     }
 
     render() {
         return <>
+        <label onClick={this.onLuminaireDetailsChanged}>label</label>
             <Luminaire
                 luminaires={this.props.luminaires}
                 pickedLuminaire={this.props.pickedLuminaire}

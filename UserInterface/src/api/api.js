@@ -1,5 +1,11 @@
 export const luminaireApi = {
-    _getPromise(){
+    _b64ToUtf8(str) {
+        return decodeURIComponent(escape(window.atob(str)));
+    },
+    _utf8ToB64(str) {
+        return window.btoa(unescape(encodeURIComponent(str)));
+    },
+    _getPromise() {
         let promise = new window.Autodesk.JavaScript.Promise()
         promise.then(s => s, e => e)
         return promise
@@ -14,28 +20,31 @@ export const luminaireApi = {
                 functionParams: JSON.stringify({ Page: currentPage, PageSize: pageSize })
             }),
             resultAsString => {
-                promise.success(JSON.parse(resultAsString).retValue)
+                let value = this._b64ToUtf8(JSON.parse(resultAsString).retValue)
+                promise.success(JSON.parse(value))
             },
             resultAsString => {
                 promise.error(JSON.parse(resultAsString))
             })
         return promise
     },
-    postLuminare(luminaire){
+    postLuminare(luminaire) {
         let promise = this._getPromise()
+        let encodedLuminaire = this._utf8ToB64(JSON.stringify(luminaire))
 
-        window['execAsync'](            
+        window['execAsync'](
             JSON.stringify({
                 functionName: 'UpdateLuminaire',
                 invokeAsCommand: false,
-                functionParams: JSON.stringify(luminaire)
+                functionParams: encodedLuminaire
             }),
             resultAsString => {
-                promise.success(JSON.parse(resultAsString).retValue)
+                let value = this._b64ToUtf8(JSON.parse(resultAsString).retValue)
+                promise.success(JSON.parse(value))
             },
             resultAsString => {
                 promise.error(JSON.parse(resultAsString))
-            }
-        )
+            })
+        return promise
     }
 }

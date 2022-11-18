@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using stj = System.Text.Json;
@@ -20,6 +19,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using LightingServices.Api.Controllers;
 using LightingServices.App.CQRS.Luminaire.Dto;
+using System.Security.Policy;
+using static System.Net.Mime.MediaTypeNames;
+using Autodesk.AutoCAD.GraphicsInterface;
 
 [assembly: AcRnt.ExtensionApplication(typeof(LightingServices.Api.Program))]
 //[assembly: AcRnt.CommandClass(typeof(LightingServices.Api.Controllers.LuminaireController))]
@@ -84,16 +86,16 @@ namespace LightingServices.Api
             try
             {
                 jsonArgs = jsonArgs
-                    .Substring(jsonArgs.IndexOf("{"))
-                    .Substring(0, jsonArgs.LastIndexOf("}"));
+                    .Substring(1)
+                    .Substring(0, jsonArgs.Length - 3);
 
-                jsonArgs = Regex.Replace(jsonArgs, @"\\", "");
+                var bytes = Convert.FromBase64String(jsonArgs);
+                var str = Encoding.UTF8.GetString(bytes);
 
-                var luminaire = JsonConvert.DeserializeAnonymousType(jsonArgs, new { Page = 0, PageSize = 0 });
+                var changedLum = JsonConvert.DeserializeObject<ChangedLuminaire>(str);
 
-                /*res = _host.Services.GetRequiredService<LuminaireController>().GetAll(luminaire.PageSize, luminaire.Page);
-                return res;*/
-                return "";
+                res = _host.Services.GetRequiredService<LuminaireController>().ChangeLuminaire(changedLum);
+                return res;
             }
             catch (Exception exception)
             {

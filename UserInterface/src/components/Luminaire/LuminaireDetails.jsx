@@ -14,6 +14,8 @@ const LuminaireDetails = (props) => {
     const newBrand = React.createRef()
     const newLightSourceType = React.createRef()
     const newPower = React.createRef()
+    const newSocle = React.createRef()
+    const newLampsNumber = React.createRef()
     const newTechnicalSpecifications = React.createRef()
     const newMountingType = React.createRef()
     const newMountingSubtype = React.createRef()
@@ -24,6 +26,9 @@ const LuminaireDetails = (props) => {
     const newLength = React.createRef()
     const newWidth = React.createRef()
     const newDiameter = React.createRef()
+    const newLengthOnDwg = React.createRef()
+    const newWidthOnDwg = React.createRef()
+    const newDiameterOnDwg = React.createRef()
     const newLdtIesFile = React.createRef()
     const newCableBrand = React.createRef()
     const newCoresNumber = React.createRef()
@@ -41,7 +46,9 @@ const LuminaireDetails = (props) => {
     const onLightSourceInfoChanged = () => {
         const LightSourceType = newLightSourceType.current.value
         const Power = newPower.current.value
-        props.onLightSourceInfoChanged({ LightSourceType, Power })
+        const Socle = newSocle.current.value
+        const LampsNumber = newLampsNumber.current.value
+        props.onLightSourceInfoChanged({ LightSourceType, Power, Socle, LampsNumber })
     }
     const onTechnicalSpecificationsChanged = () => {
         const technicalSpecifications = newTechnicalSpecifications.current.value
@@ -84,7 +91,11 @@ const LuminaireDetails = (props) => {
         const Length = newLength.current.value
         const Width = newWidth.current.value
         const Diameter = newDiameter.current.value
-        props.onDimensionsChanged({Length, Width, Diameter})
+        const LengthOnDwg = newLengthOnDwg.current.value
+        const WidthOnDwg = newWidthOnDwg.current.value
+        const DiameterOnDwg = newDiameterOnDwg.current.value
+
+        props.onDimensionsChanged({ Length, Width, Diameter, LengthOnDwg, WidthOnDwg, DiameterOnDwg })
     }
     const onLdtIesFileChanged = () => {
         const ldtIesFile = newLdtIesFile.current.value
@@ -94,7 +105,7 @@ const LuminaireDetails = (props) => {
         const Brand = newCableBrand.current.value
         const CoresNumber = newCoresNumber.current.value
         const Section = newSection.current.value
-        props.onCableChanged({Brand, CoresNumber, Section})
+        props.onCableChanged({ Brand, CoresNumber, Section })
     }
 
     const onDetailsClose = () => {
@@ -122,6 +133,10 @@ const LuminaireDetails = (props) => {
                     <FormControl value={props.pickedLuminaire.LightSourceInfo === undefined ? '' : props.pickedLuminaire.LightSourceInfo.LightSourceType} ref={newLightSourceType} onChange={onLightSourceInfoChanged} />
                     <InputGroup.Text>Мощность</InputGroup.Text>
                     <FormControl value={props.pickedLuminaire.LightSourceInfo === undefined ? '' : props.pickedLuminaire.LightSourceInfo.Power} ref={newPower} onChange={onLightSourceInfoChanged} />
+                    <InputGroup.Text>Цоколь</InputGroup.Text>
+                    <FormControl value={props.pickedLuminaire.LightSourceInfo === undefined ? '' : props.pickedLuminaire.LightSourceInfo.Socle} ref={newSocle} onChange={onLightSourceInfoChanged} />
+                    <InputGroup.Text>Кол-во ламп</InputGroup.Text>
+                    <FormControl value={props.pickedLuminaire.LightSourceInfo === undefined ? '' : props.pickedLuminaire.LightSourceInfo.LampsNumber} ref={newLampsNumber} onChange={onLightSourceInfoChanged} />
                 </InputGroup>
                 <InputGroup>
                     <InputGroup.Text>Технические условия</InputGroup.Text>
@@ -168,6 +183,12 @@ const LuminaireDetails = (props) => {
                     <FormControl value={props.pickedLuminaire.Dimensions === undefined ? '' : props.pickedLuminaire.Dimensions.Width} ref={newWidth} onChange={onDimensionsChanged} />
                     <InputGroup.Text>Диаметр</InputGroup.Text>
                     <FormControl value={props.pickedLuminaire.Dimensions === undefined ? '' : props.pickedLuminaire.Dimensions.Diameter} ref={newDiameter} onChange={onDimensionsChanged} />
+                    <InputGroup.Text>Длина в DWG</InputGroup.Text>
+                    <FormControl value={props.pickedLuminaire.Dimensions === undefined ? '' : props.pickedLuminaire.Dimensions.LengthOnDwg} ref={newLengthOnDwg} onChange={onDimensionsChanged} />
+                    <InputGroup.Text>Ширина в DWG</InputGroup.Text>
+                    <FormControl value={props.pickedLuminaire.Dimensions === undefined ? '' : props.pickedLuminaire.Dimensions.WidthOnDwg} ref={newWidthOnDwg} onChange={onDimensionsChanged} />
+                    <InputGroup.Text>Диаметр в DWG</InputGroup.Text>
+                    <FormControl value={props.pickedLuminaire.Dimensions === undefined ? '' : props.pickedLuminaire.Dimensions.DiameterOnDwg} ref={newDiameterOnDwg} onChange={onDimensionsChanged} />
                 </InputGroup>
                 <InputGroup>
                     <InputGroup.Text>Файл формата Ldt или Ies</InputGroup.Text>

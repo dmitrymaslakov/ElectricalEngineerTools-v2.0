@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LightingServices.App.CQRS.Luminaire.Commands.CreateLuminaire;
+using LightingServices.App.CQRS.Luminaire.Commands.UpdateLuminaire;
 using LightingServices.App.CQRS.Luminaire.Dto;
 using LightingServices.App.CQRS.Luminaire.Queries.GetLuminaireDetails;
 using LightingServices.App.CQRS.Luminaire.Queries.GetLuminaireList;
@@ -8,6 +9,7 @@ using MediatR;
 using Newtonsoft.Json;
 using Serilog;
 using System;
+using System.Text;
 using System.Threading.Tasks;
 using AcRnt = Autodesk.AutoCAD.Runtime;
 
@@ -39,13 +41,24 @@ namespace LightingServices.Api.Controllers
             return json;
         }
 
-        private string returnAsJSON(LuminaireListVm vm)
+        public string ChangeLuminaire(ChangedLuminaire changedLum)
         {
+            var command = new UpdateLuminaireCommand { ChangedLuminaire = changedLum };
+            var vm = _mediator.Send(command).Result;
+            var json = returnAsJSON(vm);
+            return json;
+        }
+
+        private string returnAsJSON(object vm)
+        {
+            byte[] vmBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(vm));
+            string vmString = Convert.ToBase64String(vmBytes);
+
             return JsonConvert.SerializeObject(
                     new
                     {
                         retCode = 0,
-                        retValue = vm
+                        retValue = vmString
                     });
         }
 

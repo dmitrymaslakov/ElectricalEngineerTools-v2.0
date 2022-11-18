@@ -52,6 +52,7 @@
     <Compile Include="CQRS\Luminaire\Dto\CableDto.cs" />
     <Compile Include="CQRS\Luminaire\Commands\CreateLuminaire\CreateLuminaireCommand.cs" />
     <Compile Include="CQRS\Luminaire\Commands\CreateLuminaire\CreateLuminaireCommandHandler.cs" />
+    <Compile Include="CQRS\Luminaire\Dto\ChangedLuminaire.cs" />
     <Compile Include="CQRS\Luminaire\Dto\DimensionsDto.cs" />
     <Compile Include="CQRS\Luminaire\Dto\LightSourceInfoDto.cs" />
     <Compile Include="CQRS\Luminaire\Dto\LuminaireDto.cs" />
@@ -93,6 +94,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Hosting">
       <Version>6.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />

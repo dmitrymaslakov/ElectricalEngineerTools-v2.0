@@ -37,6 +37,13 @@ const luminaireSlice = createSlice({
         setPickedLuminaire(state, action) {
             state.pickedLuminaire = action.payload
         },
+        updateLuminaire(state, action) {
+            //state.luminaires.map(l => l.Id === action.payload.Id ? action.payload : l)
+            state.luminaires = state.luminaires.map(l => l.Id === action.payload.Id ? action.payload : l)
+            console.log(state.luminaires[0])
+            console.log(state.luminaires)
+            console.log(action.payload)
+        },
         setLuminousFlux(state, action) { state.luminousFlux = action.payload },
         setManufacturer(state, action) {
             state.pickedLuminaire.Manufacturer = action.payload
@@ -135,7 +142,8 @@ export const postChangedLuminaire = (luminaire) => {
     return (dispatch) => {
         luminaireApi.postLuminare(luminaire)
             .then(data => {
-                console.log(data)
+                dispatch(updateLuminaire(data))
+                //dispatch(updateLuminaire({lamp: 'kfvg'}))
             },
                 er => console.log(er)
             )
@@ -147,6 +155,7 @@ export const {
     setTotalPages,
     setCurrentPage,
     setPickedLuminaire,
+    updateLuminaire,
     setLuminousFlux,
     setManufacturer,
     setBrand,
