@@ -100,7 +100,7 @@ namespace LightingServices.App.CQRS.Luminaire.Queries.GetIlluminance
                 else
                     luminousFluxOfConditionalLamp = 1000;
 
-                if (request.Room.SelectedPcPwPws == "")
+                if (request.Room.PcPwPws == "")
                 {
                     return "Не установлено значение РпРсРр";
                 }
@@ -109,7 +109,7 @@ namespace LightingServices.App.CQRS.Luminaire.Queries.GetIlluminance
                 "ElectricalEngineerTools.Framework.PL;component/Resources/Зональные множители для расчетов коэффициента использования.txt";
                 //"ElectricalEngineerTools.Framework.PL.Resources.Зональные множители для расчетов коэффициента использования.txt";
 
-                int[] ListCoeffValue_n = GetListCoeff_n(request.Room.SelectedPcPwPws, listIndexValue_i, query, pathTxtFile, luminousFluxOfConditionalLamp);
+                int[] ListCoeffValue_n = GetListCoeff_n(request.Room.PcPwPws, listIndexValue_i, query, pathTxtFile, luminousFluxOfConditionalLamp);
                 for (int i = 0; i < listIndexValue_i.Length; i++)
                 {
                     dictionary_i_n.Add(listIndexValue_i[i], ListCoeffValue_n[i]);

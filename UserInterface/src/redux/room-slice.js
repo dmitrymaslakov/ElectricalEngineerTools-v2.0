@@ -80,8 +80,8 @@ export const getIlluminance = () => {
             NumberAlongX: getState().room.NumberAlongX,
             NumberAlongY: getState().room.NumberAlongY,
             WorkingSurfaceHeight: getState().room.WorkingSurfaceHeight,
-            MountingHeight: getState().room.MountingHeight,
-            SelectedPcPwPws: getState().room.SelectedPcPwPws,
+            MountingHeight: getState().luminaire.mountingHeight,
+            PcPwPws: getState().room.PcPwPws,
             Length: getState().room.Length,
             Width: getState().room.Width
         }

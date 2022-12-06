@@ -49,6 +49,7 @@ export const luminaireApi = {
     },
     getIlluminance(roomData){
         let promise = this._getPromise()
+        console.log(roomData)
 
         window['execAsync'](
             JSON.stringify({

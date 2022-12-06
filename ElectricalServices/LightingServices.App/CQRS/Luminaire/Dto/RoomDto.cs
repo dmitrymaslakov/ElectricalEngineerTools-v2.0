@@ -14,7 +14,7 @@ namespace LightingServices.App.CQRS.Luminaire.Dto
         public int NumberAlongY { get; set; }
         public double WorkingSurfaceHeight { get; set; }
         public double MountingHeight { get; set; }
-        public string SelectedPcPwPws { get; set; }
+        public string PcPwPws { get; set; }
         public double Length { get; set; }
         public double Width { get; set; }
     }
