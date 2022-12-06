@@ -1,7 +1,9 @@
-﻿using AutoMapper;
+﻿using Autodesk.Windows;
+using AutoMapper;
 using LightingServices.App.CQRS.Luminaire.Commands.CreateLuminaire;
 using LightingServices.App.CQRS.Luminaire.Commands.UpdateLuminaire;
 using LightingServices.App.CQRS.Luminaire.Dto;
+using LightingServices.App.CQRS.Luminaire.Queries.GetIlluminance;
 using LightingServices.App.CQRS.Luminaire.Queries.GetLuminaireDetails;
 using LightingServices.App.CQRS.Luminaire.Queries.GetLuminaireList;
 using LightingServices.App.Interfaces;
@@ -41,10 +43,18 @@ namespace LightingServices.Api.Controllers
             return json;
         }
 
-        public string ChangeLuminaire(ChangedLuminaire changedLum)
+        public string ChangeLuminaire(ChangedLuminaireDto changedLum)
         {
             var command = new UpdateLuminaireCommand { ChangedLuminaire = changedLum };
             var vm = _mediator.Send(command).Result;
+            var json = returnAsJSON(vm);
+            return json;
+        }
+
+        public string CalculateIlluminance(RoomDto room)
+        {
+            var query = new GetIlluminanceQuery { Room = room};
+            var vm = _mediator.Send(query).Result;
             var json = returnAsJSON(vm);
             return json;
         }
@@ -62,7 +72,7 @@ namespace LightingServices.Api.Controllers
                     });
         }
 
-        [AcRnt.JavaScriptCallback("Get")]
+        /*[AcRnt.JavaScriptCallback("Get")]
         //public async Task<LuminaireDetailsVm> Get(int id)
         public string Get(string id)
         {
@@ -102,6 +112,6 @@ namespace LightingServices.Api.Controllers
         {
             var res = _mediator.Send(new GetLuminaireDetailsQuery { Id = 1 });
             var vm = res.Result;
-        }
+        }*/
     }
 }

@@ -46,11 +46,17 @@ namespace LightingServices.Api
             }
         }
 
-        [AcRnt.CommandMethod("pm", AcRnt.CommandFlags.Session)]
+        /*[AcRnt.CommandMethod("pm", AcRnt.CommandFlags.Session)]
         public void ProgramMethod()
         {
             var lc = _host.Services.GetRequiredService<LuminaireController>();
             lc.ControllerMethod();
+        }*/
+        [AcRnt.JavaScriptCallback("DetermineRoomDimensions")]
+        public string DetermineRoomDimensions(string jsonArgs)
+        {
+            string res = _host.Services.GetRequiredService<RoomController>().DetermineRoomDimensions();
+            return res;
         }
 
         //[AcRnt.CommandMethod("GetAll", AcRnt.CommandFlags.Session)]
@@ -92,9 +98,34 @@ namespace LightingServices.Api
                 var bytes = Convert.FromBase64String(jsonArgs);
                 var str = Encoding.UTF8.GetString(bytes);
 
-                var changedLum = JsonConvert.DeserializeObject<ChangedLuminaire>(str);
+                var changedLum = JsonConvert.DeserializeObject<ChangedLuminaireDto>(str);
 
                 res = _host.Services.GetRequiredService<LuminaireController>().ChangeLuminaire(changedLum);
+                return res;
+            }
+            catch (Exception exception)
+            {
+                Log.Error(exception, exception.Message);
+                return res;
+            }
+        }
+
+        [AcRnt.JavaScriptCallback("CalculateIlluminance")]
+        public string CalculateIlluminance(string jsonArgs)
+        {
+            string res = "";
+
+            try
+            {
+                jsonArgs = jsonArgs
+                    .Substring(jsonArgs.IndexOf("{"))
+                    .Substring(0, jsonArgs.LastIndexOf("}"));
+
+                jsonArgs = Regex.Replace(jsonArgs, @"\\", "");
+
+                var room = JsonConvert.DeserializeObject<RoomDto>(jsonArgs);
+                res = _host.Services.GetRequiredService<LuminaireController>().CalculateIlluminance(room);
+
                 return res;
             }
             catch (Exception exception)

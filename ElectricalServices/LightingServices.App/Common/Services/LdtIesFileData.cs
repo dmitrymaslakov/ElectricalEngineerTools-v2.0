@@ -12,16 +12,10 @@ namespace ElectricalEngineerTools.Framework.DAL.Entities
 {
     public class LdtIesFileData
     {
-        public LdtIesFileData()
-        {
-
-        }
         public LdtIesFileData(string fileName)
         {
             InitializeFields(fileName);
         }
-
-
         //Line 1
         public string CompanyIdentification { get; private set; }
         /// <summary>
@@ -337,5 +331,6 @@ namespace ElectricalEngineerTools.Framework.DAL.Entities
             // Line 32
             public double Wattage { get; set; }
         }
+
     }
 }

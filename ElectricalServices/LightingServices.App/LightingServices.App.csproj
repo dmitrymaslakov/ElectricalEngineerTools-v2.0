@@ -33,6 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AcMaslakov, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LightingServices.Api\bin\Debug\AcMaslakov.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -42,6 +47,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Exceptions\NotFoundException.cs" />
@@ -49,10 +55,12 @@
     <Compile Include="Common\Mapping\IMapWith.cs" />
     <Compile Include="Common\Pading\IndexViewModel.cs" />
     <Compile Include="Common\Pading\PageViewModel.cs" />
+    <Compile Include="Common\Services\LdtIesFileData.cs" />
+    <Compile Include="CQRS\Luminaire\Dto\RoomDto.cs" />
     <Compile Include="CQRS\Luminaire\Dto\CableDto.cs" />
     <Compile Include="CQRS\Luminaire\Commands\CreateLuminaire\CreateLuminaireCommand.cs" />
     <Compile Include="CQRS\Luminaire\Commands\CreateLuminaire\CreateLuminaireCommandHandler.cs" />
-    <Compile Include="CQRS\Luminaire\Dto\ChangedLuminaire.cs" />
+    <Compile Include="CQRS\Luminaire\Dto\ChangedLuminaireDto.cs" />
     <Compile Include="CQRS\Luminaire\Dto\DimensionsDto.cs" />
     <Compile Include="CQRS\Luminaire\Dto\LightSourceInfoDto.cs" />
     <Compile Include="CQRS\Luminaire\Dto\LuminaireDto.cs" />
@@ -62,6 +70,8 @@
     <Compile Include="CQRS\Luminaire\Commands\DeleteLuminaire\DeleteLuminaireCommandHandler.cs" />
     <Compile Include="CQRS\Luminaire\Commands\UpdateLuminaire\UpdateLuminaireCommandHandler.cs" />
     <Compile Include="CQRS\Luminaire\Commands\UpdateLuminaire\UpdateLuminaireCommand.cs" />
+    <Compile Include="CQRS\Luminaire\Queries\GetIlluminance\GetIlluminanceQuery.cs" />
+    <Compile Include="CQRS\Luminaire\Queries\GetIlluminance\GetIlluminanceQueryHandler.cs" />
     <Compile Include="CQRS\Luminaire\Queries\GetLuminaireDetails\GetLuminaireDetailsQueryHandler.cs" />
     <Compile Include="CQRS\Luminaire\Queries\GetLuminaireDetails\GetLuminaireDetailsQuery.cs" />
     <Compile Include="CQRS\Luminaire\Queries\GetLuminaireDetails\LuminaireDetailsVm.cs" />

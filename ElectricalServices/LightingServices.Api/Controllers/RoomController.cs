@@ -11,19 +11,19 @@ using Autodesk.AutoCAD.Geometry;
 using Autodesk.AutoCAD.EditorInput;
 using AcRnt = Autodesk.AutoCAD.Runtime;
 using Newtonsoft.Json;
+using LightingServices.Api.Controllers;
 
-[assembly: AcRnt.CommandClass(typeof(LightingServices.Api.RoomDimensions))]
+[assembly: AcRnt.CommandClass(typeof(RoomController))]
 
-namespace LightingServices.Api
+namespace LightingServices.Api.Controllers
 {
-    public class RoomDimensions
+    public class RoomController
     {
-        [AcRnt.JavaScriptCallback("DetermineRoomDimensions")]
-        public string DetermineRoomDimensions(string jsonArgs)
+        public string DetermineRoomDimensions()
         {
             try
             {
-                var ed = AcAppServices.Application.DocumentManager.MdiActiveDocument.Editor;
+                var ed = AcAppServices.Core.Application.DocumentManager.MdiActiveDocument.Editor;
                 CoordinateSystem3d curUCS = ed.CurrentUserCoordinateSystem.CoordinateSystem3d;
                 Vector2d acVec2dAng = new Vector2d(curUCS.Xaxis.X, curUCS.Xaxis.Y);
                 //Если ПСК повернут, то отрегулируем угол поворота светильников

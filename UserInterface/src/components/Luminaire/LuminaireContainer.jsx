@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Luminaire from './Luminaire'
 import {
+    th,
     getLuminaires,
     postChangedLuminaire,
     setPickedLuminaire,
@@ -41,7 +42,7 @@ class LuminaireContainer extends React.Component {
 
     render() {
         return <>
-        <label onClick={this.onLuminaireDetailsChanged}>label</label>
+            <label onClick={() => this.props.th(1,2)} >Thunk</label>
             <Luminaire
                 luminaires={this.props.luminaires}
                 pickedLuminaire={this.props.pickedLuminaire}
@@ -92,6 +93,7 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
+    th,
     getLuminaires,
     postChangedLuminaire,
     setPickedLuminaire,

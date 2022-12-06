@@ -63,7 +63,7 @@
     <Compile Include="DependencyInjection.cs" />
     <Compile Include="Models\CreateLuminaireDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoomDimensions.cs" />
+    <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

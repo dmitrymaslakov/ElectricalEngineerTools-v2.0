@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 
 namespace LightingServices.App.CQRS.Luminaire.Dto
 {
-    public class ChangedLuminaire
+    public class ChangedLuminaireDto
     {
         public int Id { get; set; }
         [JsonExtensionData]

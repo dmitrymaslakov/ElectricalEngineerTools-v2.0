@@ -46,5 +46,23 @@ export const luminaireApi = {
                 promise.error(JSON.parse(resultAsString))
             })
         return promise
+    },
+    getIlluminance(roomData){
+        let promise = this._getPromise()
+
+        window['execAsync'](
+            JSON.stringify({
+                functionName: 'CalculateIlluminance',
+                invokeAsCommand: false,
+                functionParams: JSON.stringify(roomData)
+            }),
+            resultAsString => {
+                //let value = this._b64ToUtf8(JSON.parse(resultAsString).retValue)
+                promise.success(JSON.parse(resultAsString).retValue)
+            },
+            resultAsString => {
+                promise.error(JSON.parse(resultAsString))
+            })
+        return promise
     }
 }

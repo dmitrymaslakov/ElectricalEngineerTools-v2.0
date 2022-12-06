@@ -20,6 +20,7 @@ namespace LightingServices.Api
                     config.AddProfile(new AssemblyMappingProfile(typeof(ILightingDbContext).Assembly));
                 });
                 services.AddTransient<LuminaireController>();
+                services.AddTransient<RoomController>();
             })
                 .UseSerilog((context, loggerConfiguration) =>
                 {

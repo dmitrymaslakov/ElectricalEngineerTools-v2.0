@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import LuminairesManagement from './LuminairesManagement'
-import { getLuminaires } from '../../redux/luminaires-management-slice'
+import { getLuminaires } from '../../redux/launch-panel-slice'
 
 class LuminairesManagementContainer extends React.Component {
     componentDidMount() {

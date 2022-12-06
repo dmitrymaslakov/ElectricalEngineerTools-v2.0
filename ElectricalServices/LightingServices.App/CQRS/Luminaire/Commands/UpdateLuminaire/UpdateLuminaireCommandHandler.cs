@@ -24,6 +24,9 @@ namespace LightingServices.App.CQRS.Luminaire.Commands.UpdateLuminaire
         public async Task<LuminaireDto> Handle(UpdateLuminaireCommand request,
             CancellationToken cancellationToken)
         {
+            var luminaire1 =
+                await _dbContext.LightingFixtures.Where(lf => lf.Id == 22).FirstOrDefaultAsync();
+
             var luminaire =
                 await _dbContext.LightingFixtures.FirstOrDefaultAsync(lf =>
                     lf.Id == request.ChangedLuminaire.Id, cancellationToken);
@@ -139,12 +142,12 @@ namespace LightingServices.App.CQRS.Luminaire.Commands.UpdateLuminaire
             {
                 newDimensions = new Dimensions
                 {
-                    Width = dimensionsDTO.Width,
-                    Length = dimensionsDTO.Length,
-                    Diameter = dimensionsDTO.Diameter,
-                    WidthOnDwg = dimensionsDTO.WidthOnDwg,
-                    LengthOnDwg = dimensionsDTO.LengthOnDwg,
-                    DiameterOnDwg = dimensionsDTO.DiameterOnDwg
+                    Width = dimensionsDTO.Width == 0 ? null : dimensionsDTO.Width,
+                    Length = dimensionsDTO.Length == 0 ? null : dimensionsDTO.Length,
+                    Diameter = dimensionsDTO.Diameter == 0 ? null : dimensionsDTO.Diameter,
+                    WidthOnDwg = dimensionsDTO.WidthOnDwg == 0 ? null : dimensionsDTO.WidthOnDwg,
+                    LengthOnDwg = dimensionsDTO.LengthOnDwg == 0 ? null : dimensionsDTO.LengthOnDwg,
+                    DiameterOnDwg = dimensionsDTO.DiameterOnDwg == 0 ? null : dimensionsDTO.DiameterOnDwg
                 };
                 luminaire.DimensionsId = _dbContext.Dimensions.Add(newDimensions).Id;
             }

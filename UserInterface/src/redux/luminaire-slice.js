@@ -38,11 +38,8 @@ const luminaireSlice = createSlice({
             state.pickedLuminaire = action.payload
         },
         updateLuminaire(state, action) {
-            //state.luminaires.map(l => l.Id === action.payload.Id ? action.payload : l)
+            state.changedLuminaireParameters = {}
             state.luminaires = state.luminaires.map(l => l.Id === action.payload.Id ? action.payload : l)
-            console.log(state.luminaires[0])
-            console.log(state.luminaires)
-            console.log(action.payload)
         },
         setLuminousFlux(state, action) { state.luminousFlux = action.payload },
         setManufacturer(state, action) {
@@ -149,6 +146,14 @@ export const postChangedLuminaire = (luminaire) => {
             )
     }
 }
+
+export const th = (one, two) => {
+    return (dispatch, getState) => {
+        let st = getState()
+        console.log(st.luminaire.pageSize)
+    }
+}
+
 
 export const {
     getPage,
