@@ -31,6 +31,7 @@ class LuminaireContainer extends React.Component {
     }
 
     onPageChanged = (pageNumber) => {
+        debugger
         this.props.getLuminaires(pageNumber, this.props.pageSize)
     }
 

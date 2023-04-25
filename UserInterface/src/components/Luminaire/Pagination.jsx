@@ -8,7 +8,6 @@ const PaginationBasic = (props) => {
             <Pagination.First onClick={() => props.onPageChanged(1)} />
             <Pagination.Prev onClick={() => 
                 { 
-                    debugger
                     if (props.currentPage > 1) props.onPageChanged(props.currentPage - 1) 
                     }} />
             <Pagination.Item>{1}</Pagination.Item>
@@ -23,7 +22,6 @@ const PaginationBasic = (props) => {
             <Pagination.Ellipsis />
             <Pagination.Item>{20}</Pagination.Item>
             <Pagination.Next onClick={() => { 
-                debugger
                 if (props.currentPage <= props.totalPages) props.onPageChanged(props.currentPage + 1) }} />
             <Pagination.Last />
         </Pagination>

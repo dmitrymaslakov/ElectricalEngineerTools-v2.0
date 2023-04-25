@@ -68,7 +68,8 @@ function LuminairePicking(props) {
                                 pageSize={props.pageSize}
                                 totalPages={props.totalPages}
                                 currentPage={props.currentPage}
-                                onPageChanged={props.onPageChanged}
+                                //onPageChanged={props.onPageChanged}
+                                onPageChanged={console.log(props.onPageChanged)}
                             />
                             <ListGroup variant='flush'>
                                 {

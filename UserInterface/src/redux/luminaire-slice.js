@@ -124,7 +124,7 @@ const luminaireSlice = createSlice({
 
 export const getLuminaires = (currentPage, pageSize) => {
     return (dispatch) => {
-        luminaireApi.getLuminaresPage(currentPage, pageSize)
+        luminaireApi.getLuminaresPage(currentPage, pageSize) 
             .then(data => {
                 dispatch(getPage(data.Luminaires.Entities))
                 dispatch(setCurrentPage(data.Luminaires.PageViewModel.PageNumber))
