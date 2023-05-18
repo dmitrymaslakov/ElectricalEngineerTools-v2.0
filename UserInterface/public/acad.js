@@ -18,3 +18,7 @@ function OnArxSuccess(result) {
 function OnArxError(result) {
     console.log('Error')
 }
+
+export default () => {
+    console.log('acad.js')
+}

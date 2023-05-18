@@ -52,6 +52,36 @@ namespace LightingServices.Api
             var lc = _host.Services.GetRequiredService<LuminaireController>();
             lc.ControllerMethod();
         }*/
+
+        [AcRnt.JavaScriptCallback("AsyncOperation")]
+        public string AsyncOperation(string jsonArgs)
+        {
+            try
+            {
+
+                jsonArgs = jsonArgs
+                    .Substring(1)
+                    .Substring(0, jsonArgs.Length - 3);
+
+                var bytes = Convert.FromBase64String(jsonArgs);
+                var str = Encoding.UTF8.GetString(bytes);
+
+                string json = JsonConvert.SerializeObject(
+                    new
+                    {
+                        retCode = 0,
+                        retErrorString = "Maslakov"
+                        /*retValue = new double[] { 10, 20 }*/
+                    });
+                return json;
+            }
+            catch (Exception e)
+            {
+                return "";
+            }
+        }
+
+
         [AcRnt.JavaScriptCallback("DetermineRoomDimensions")]
         public string DetermineRoomDimensions(string jsonArgs)
         {

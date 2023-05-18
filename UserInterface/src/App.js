@@ -1,25 +1,17 @@
-import React from 'react'
-import { BrowserRouter, Link, Route } from 'react-router-dom'
-import About from './pages/About'
-import Posts from './pages/Posts'
+import React, { useEffect, useState } from 'react'
+import RoomContainer from './components/Room/RoomContainer'
+import LuminaireContainer from './components/Luminaire/LuminaireContainer'
+import LaunchPanel from './components/LaunchPanel'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
+import { luminaireService } from './api/luminaireService'
+import { ListGroup } from 'react-bootstrap'
+import LuminaireList from './components/LuminaireNew/LuminaireList'
 
 const App = () => {
-  return (
-    <BrowserRouter>
-      <div className='navbar'>
-        <div className='navbar__links'>
-          <Link to='/about'>О сайте</Link>
-          <Link to='/posts'>Посты</Link>
-        </div>
-      </div>
-      <Route path='/about'>
-        <About />
-      </Route>
-      <Route path='/posts'>
-        <Posts />
-      </Route>
-    </BrowserRouter>
-  )
+
+  return <LuminaireList/>
 }
 
 export default App

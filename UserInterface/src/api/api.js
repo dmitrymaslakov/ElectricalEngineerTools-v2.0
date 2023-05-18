@@ -24,7 +24,8 @@ export const luminaireApi = {
                 promise.success(JSON.parse(value))
             },
             resultAsString => {
-                promise.error(JSON.parse(resultAsString))
+                console.log(resultAsString)
+                //promise.error(JSON.parse(resultAsString))
             })
         return promise
     },

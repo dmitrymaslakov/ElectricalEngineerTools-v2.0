@@ -37,12 +37,12 @@
   <ItemGroup>
     <Reference Include="Ac.NetApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Ac.NetApi.dll</HintPath>
+      <HintPath>..\..\..\Ac.NetApi.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AcMaslakov, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\AcMaslakov.dll</HintPath>
+      <HintPath>..\..\..\AcMaslakov.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationFramework" />

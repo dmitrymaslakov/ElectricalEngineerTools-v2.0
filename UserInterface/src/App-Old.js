@@ -1,4 +1,10 @@
 import React from 'react'
+import RoomContainer from './components/Room/RoomContainer'
+import LuminaireContainer from './components/Luminaire/LuminaireContainer'
+import LaunchPanel from './components/LaunchPanel'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
 
 const App = () => {
 
