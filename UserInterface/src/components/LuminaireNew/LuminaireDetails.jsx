@@ -11,33 +11,61 @@ import Accordion from 'react-bootstrap/Accordion'
 
 const LuminaireDetails = ({ show, setShow, luminaire, setActiveLum }) => {
 
+    const inputsData = [
+        {Id: 1, label: 'Тип', propName: 'Brand'},
+        {Id: 2, label: 'Источник света', propName: 'LightSourceType'},
+        {Id: 3, label: 'Мощность', propName: 'Power'},
+        {Id: 4, label: 'Цоколь', propName: 'Socle'},
+        {Id: 5, label: 'Кол-во ламп', propName: 'LampsNumber'},
+        {Id: 6, label: 'Технические условия', propName: 'TechnicalSpecifications'},
+        {Id: 7, label: 'Тип монтажа', propName: 'MountingType'},
+        {Id: 8, label: 'Способ монтажа', propName: 'MountingSubtype'},
+        {Id: 9, label: 'Климатическое исполнение', propName: 'ClimateApplication'},
+        {Id: 10, label: 'Производитель', propName: 'Manufacturer'},
+        {Id: 11, label: 'Рассеиватель', propName: 'DiffuserMaterial'},
+        {Id: 12, label: 'Степень защиты', propName: 'IP'},
+        {Id: 13, label: 'Класс защиты электрооборудования', propName: 'EquipmentClass'},
+        {Id: 14, label: 'Пожаробезопасный', propName: 'IsFireproof'},
+        {Id: 15, label: 'Взрывобезопасный', propName: 'IsExplosionProof'},
+        {Id: 16, label: 'БАП', propName: 'BPSU'},
+        {Id: 17, label: 'Длина', propName: 'Length'},
+        {Id: 18, label: 'Ширина', propName: 'Width'},
+        {Id: 19, label: 'Диаметр', propName: 'Diameter'},
+        {Id: 20, label: 'Длина в DWG', propName: 'LengthOnDwg'},
+        {Id: 21, label: 'Ширина в DWG', propName: 'WidthOnDwg'},
+        {Id: 22, label: 'Диаметр в DWG', propName: 'DiameterOnDwg'},
+        {Id: 23, label: 'Файл формата Ldt или Ies', propName: 'LdtIesFile'},
+        {Id: 24, label: 'Марка кабеля', propName: 'Cable.Brand'},
+        {Id: 25, label: 'Кол-во жил', propName: 'CoresNumber'},
+        {Id: 26, label: 'Сечение', propName: 'Section'},
+    ]
 
-    function getPropertyPath(property) {
+    const getPropertyPath = (property) => {
 
-        const paths = [];
-        const stack = [{ obj: luminaire, path: '' }];
+        const paths = []
+        const stack = [{ obj: luminaire, path: '' }]
 
         while (stack.length > 0) {
-            const { obj, path } = stack.pop();
+            const { obj, path } = stack.pop()
 
             for (let key in obj) {
                 if (obj.hasOwnProperty(key)) {
-                    const fullPath = path ? `${path}.${key}` : key;
+                    const fullPath = path ? `${path}.${key}` : key
 
                     if (key === property) {
-                        paths.push(fullPath);
+                        paths.push(fullPath)
                     }
 
                     if (typeof obj[key] === 'object' && obj[key] !== null) {
                         if (Array.isArray(obj[key])) {
                             obj[key].forEach((item, index) => {
-                                const arrayPath = `${fullPath}[${index}]`;
+                                const arrayPath = `${fullPath}[${index}]`
                                 if (typeof item === 'object' && item !== null) {
-                                    stack.push({ obj: item, path: arrayPath });
+                                    stack.push({ obj: item, path: arrayPath })
                                 }
-                            });
+                            })
                         } else {
-                            stack.push({ obj: obj[key], path: fullPath });
+                            stack.push({ obj: obj[key], path: fullPath })
                         }
                     }
                 }
@@ -46,26 +74,6 @@ const LuminaireDetails = ({ show, setShow, luminaire, setActiveLum }) => {
 
         return paths.length > 0 ? paths[0] : null
     }
-
-
-    const handlePropertyChange = (lumProp, e) => {
-        const value = parseInt(e.target.value)
-        setActiveLum((prevLuminaire) => ({
-            ...prevLuminaire,
-            Dimensions: {
-                ...prevLuminaire.Dimensions,
-                [lumProp]: value,
-            },
-        }))
-    }
-
-    const PropertyInputGroup = () => {
-        return <PropertyInput
-            label="Длина"
-            value={luminaire.Dimensions.Length}
-            onChange={(e) => changeProperty('Length', e.target.value)} />
-    }
-
 
     const currentPropParent = (lumProp, newLum) => {
         const propertyPath = getPropertyPath(lumProp)
@@ -82,7 +90,7 @@ const LuminaireDetails = ({ show, setShow, luminaire, setActiveLum }) => {
         return currentObj
     }
 
-    function changeProperty(lumProp, newValue) {
+    const changeProperty = (lumProp, newValue) => {
         //debugger
         const newLum = _.cloneDeep(luminaire)
         const currentObj = currentPropParent(lumProp, newLum)
@@ -93,7 +101,7 @@ const LuminaireDetails = ({ show, setShow, luminaire, setActiveLum }) => {
         console.log(newLum);
     }
 
-    const PropertyInput = (label, lumProp) => {
+    const PropInput = (label, lumProp) => {
         const value = currentPropParent(lumProp, luminaire)[lumProp]
         const onChange = (e) => changeProperty(lumProp, e.target.value)
         return <>
@@ -103,6 +111,13 @@ const LuminaireDetails = ({ show, setShow, luminaire, setActiveLum }) => {
                 <InputGroup.Checkbox checked={value} onChange={onChange} />
             }
         </>
+    }
+
+    const PropInputGroup = () => {
+        inputsData.map(input => {
+            const {label, propName} = input
+            return <InputGroup>{PropInput(label, propName)}</InputGroup>
+        })
     }
 
     return <Modal fullscreen={true} show={show}
@@ -116,10 +131,10 @@ const LuminaireDetails = ({ show, setShow, luminaire, setActiveLum }) => {
         <Modal.Body className='show-grid'>
             <Container>
                 <InputGroup>
-                    {PropertyInput('Производитель', 'Manufacturer')}
+                    {PropInput('Производитель', 'Manufacturer')}
                 </InputGroup>
                 <InputGroup>
-                    {PropertyInput('Тип', 'Brand')}
+                    {PropInput('Тип', 'Brand')}
                     {/* <InputGroup.Text>Тип</InputGroup.Text>
                     <FormControl
                         value={luminaire.Brand}
@@ -127,7 +142,7 @@ const LuminaireDetails = ({ show, setShow, luminaire, setActiveLum }) => {
                 </InputGroup>
                 <InputGroup>
                     <div>
-                        {PropertyInput('Источник света', 'LightSourceType')}
+                        {PropInput('Источник света', 'LightSourceType')}
 
                         {/* <InputGroup.Text>Источник света</InputGroup.Text>
                         <FormControl
@@ -135,7 +150,7 @@ const LuminaireDetails = ({ show, setShow, luminaire, setActiveLum }) => {
                             onChange={e => setActiveLum({ ...luminaire, LightSourceInfo: { ...luminaire.LightSourceInfo, LightSourceType: e.target.value } })} /> */}
                     </div>
                     <div>
-                        {PropertyInput('Мощность', 'Power')}
+                        {PropInput('Мощность', 'Power')}
 
                         {/* <InputGroup.Text>Мощность</InputGroup.Text>
                         <FormControl
@@ -143,7 +158,7 @@ const LuminaireDetails = ({ show, setShow, luminaire, setActiveLum }) => {
                             onChange={e => setActiveLum({ ...luminaire, LightSourceInfo: { ...luminaire.LightSourceInfo, Power: e.target.value } })} /> */}
                     </div>
                     <div>
-                        {PropertyInput('Цоколь', 'Socle')}
+                        {PropInput('Цоколь', 'Socle')}
 
                         {/* <InputGroup.Text>Цоколь</InputGroup.Text>
                         <FormControl
