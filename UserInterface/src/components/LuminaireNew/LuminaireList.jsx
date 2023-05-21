@@ -20,9 +20,53 @@ const LuminaireList = () => {
       error => console.log(error))
   }
 
+
+
   const activeLumSet = (lumBrand) => {
     let lum = _.cloneDeep(luminaires.find(lum => lum.Brand === lumBrand)) || {}
     setActiveLum(lum)
+  }
+
+  const checkPropDifferences = () => {
+    const luminaireToUpdate = luminaires.find(lum => lum.Id === activeLum.Id)
+    const stack = [{ luminaireToUpdate, activeLum }]
+
+    while (stack.length > 0) {
+      const { luminaireToUpdate, activeLum } = stack.pop()
+
+      for (const key in luminaireToUpdate) {
+        if (luminaireToUpdate.hasOwnProperty(key)) {
+          if (typeof luminaireToUpdate[key] === 'object' && activeLum[key] !== null) {
+            /*if (!checkPropDifferences(luminaireToUpdate[key], activeLum[key])) {
+              return false
+            }*/
+            stack.push({ luminaireToUpdate: luminaireToUpdate[key], activeLum: activeLum[key] })
+          } else if (luminaireToUpdate[key] !== activeLum[key]) {
+            return false
+          }
+        }
+      }
+    }
+    return true
+  }
+
+  const updateLuminaire = () => {
+    //debugger
+    const updatedLuminaires = _.cloneDeep(luminaires)
+
+    /*luminaireService.updateLuminare(activeLum,
+      updatedLuminaire => {
+        const luminaireIndex = updatedLuminaires.findIndex((lum) => lum.Id === updatedLuminaire.Id)
+        if (luminaireIndex !== -1) {
+          updatedLuminaires[luminaireIndex] = updatedLuminaire
+          setLuminaires(updatedLuminaires)
+        } else {
+          console.log("Failed to find the luminaire in the array.")
+        }
+      },
+      error => {
+        console.log("Failed to update luminaire in the database:", error)
+      })*/
   }
 
   return (
@@ -43,8 +87,9 @@ const LuminaireList = () => {
       </ListGroup>
       {JSON.stringify(activeLum) === '{}' ?
         <></> :
-        <LuminaireDetails show={show} setShow={setShow}
-          luminaire={activeLum} setActiveLum={setActiveLum} />}
+        <LuminaireDetails show={show} setShow={setShow} luminaire={activeLum}
+          setActiveLum={setActiveLum} updateLuminaire={updateLuminaire}
+          checkPropDifferences={checkPropDifferences} />}
     </>)
 }
 

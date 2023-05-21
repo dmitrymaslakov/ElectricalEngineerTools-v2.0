@@ -1,3 +1,5 @@
+import { update } from "lodash";
+
 export const luminaireService = {
     _b64ToUtf8(str) {
         return decodeURIComponent(escape(window.atob(str)));
@@ -5,12 +7,12 @@ export const luminaireService = {
     _utf8ToB64(str) {
         return window.btoa(unescape(encodeURIComponent(str)));
     },
-    _getPromise() {
+    /*_getPromise() {
         let promise = new window.Autodesk.JavaScript.Promise()
         promise.then(s => s, e => e)
         return promise
     },
-    /*getLuminares(currentPage = 1, pageSize = 5) {
+    getLuminares(currentPage = 1, pageSize = 5) {
 
         const promise = new Promise((resolve, reject) => {
             window['execAsync'](
@@ -45,5 +47,24 @@ export const luminaireService = {
             resultAsString => {
                 error(resultAsString)
             })
+    },
+
+    updateLuminare(luminaire, success, error) {
+        let encodedLuminaire = this._utf8ToB64(JSON.stringify(luminaire))
+
+        window['execAsync'](
+            JSON.stringify({
+                functionName: 'UpdateLuminaire',
+                invokeAsCommand: false,
+                functionParams: encodedLuminaire
+            }),
+            resultAsString => {
+                let value = this._b64ToUtf8(JSON.parse(resultAsString).retValue)
+                success(JSON.parse(value))
+            },
+            resultAsString => {
+                error(resultAsString)
+            })
+
     }
 }
