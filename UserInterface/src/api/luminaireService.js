@@ -11,7 +11,7 @@ export const luminaireService = {
         let promise = new window.Autodesk.JavaScript.Promise()
         promise.then(s => s, e => e)
         return promise
-    },
+    },*/
     getLuminares(currentPage = 1, pageSize = 5) {
 
         const promise = new Promise((resolve, reject) => {
@@ -30,9 +30,9 @@ export const luminaireService = {
                 })
         })
         return promise
-    }*/
+    },
 
-    getLuminares(success, error, currentPage = 1, pageSize = 5) {
+    /*getLuminares(success, error, currentPage = 1, pageSize = 5) {
 
         window['execAsync'](
             JSON.stringify({
@@ -47,24 +47,26 @@ export const luminaireService = {
             resultAsString => {
                 error(resultAsString)
             })
-    },
+    },*/
 
-    updateLuminare(luminaire, success, error) {
-        let encodedLuminaire = this._utf8ToB64(JSON.stringify(luminaire))
+    updateLuminare(luminaire) {
+        const promise = new Promise((resolve, reject) => {
+            let encodedLuminaire = this._utf8ToB64(JSON.stringify(luminaire))
 
-        window['execAsync'](
-            JSON.stringify({
-                functionName: 'UpdateLuminaire',
-                invokeAsCommand: false,
-                functionParams: encodedLuminaire
-            }),
-            resultAsString => {
-                let value = this._b64ToUtf8(JSON.parse(resultAsString).retValue)
-                success(JSON.parse(value))
-            },
-            resultAsString => {
-                error(resultAsString)
-            })
-
+            window['execAsync'](
+                JSON.stringify({
+                    functionName: 'UpdateLuminaire',
+                    invokeAsCommand: false,
+                    functionParams: encodedLuminaire
+                }),
+                resultAsString => {
+                    let value = this._b64ToUtf8(JSON.parse(resultAsString).retValue)
+                    resolve(JSON.parse(value))
+                },
+                resultAsString => {
+                    reject(resultAsString)
+                })
+        })
+        return promise
     }
 }

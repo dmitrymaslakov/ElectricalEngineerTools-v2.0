@@ -1,11 +1,7 @@
 import React from "react"
-import cl from './Loader.module.css'
+import preloader from '../../../assets/preloader.svg'
 
-const Loader =() => {
-  return(
-    <div className={cl.loader}>
-
-    </div>
-  )
+const Loader = () => {
+  return <img src={preloader} />
 }
 export default Loader
