@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { luminaireService } from '../../api/luminaireService'
 import { ListGroup } from 'react-bootstrap'
-import Luminaire from './Luminaire'
+import LuminaireItem from './LuminaireItem'
 import LuminaireDetails from './LuminaireDetails'
 import Loader from '../UI/Loader/Loader'
 import _ from 'lodash'
 import { useFetching } from '../hooks/useFetching'
+import { Link } from 'react-router-dom'
 
 const LuminaireList = () => {
   const [luminaires, setLuminaires] = useState([])
   const [activeLum, setActiveLum] = useState({})
   const [show, setShow] = useState(false)
-  //const [isLuminairesLoading, setIsLuminairesLoading] = useState(false)
-  const [fetchLuminaires, isLuminairesLoading, luminaireError ] = useFetching(async() => {
+  const [fetchLuminaires, isLuminairesLoading, luminaireError] = useFetching(async () => {
     const data = await luminaireService.getLuminares()
     setLuminaires(data.Luminaires.Entities)
   })
@@ -20,28 +20,6 @@ const LuminaireList = () => {
   useEffect(() => {
     fetchLuminaires()
   }, [])
-
-  //const fetchLuminaires = () => {
-    /*luminaireService.getLuminares(
-      data => setLuminaires(data.Luminaires.Entities),
-      error => console.log(error))*/
-
-    /*setIsLuminairesLoading(true)
-    setTimeout(async () => {      
-      await luminaireService.getLuminares(
-        data => setLuminaires(data.Luminaires.Entities),
-        error => console.log(error))
-    }, 2000)
-    setIsLuminairesLoading(false)*/
-    /*setIsLuminairesLoading(true)
-    setTimeout(async () => {
-      const data = await luminaireService.getLuminares()
-      setLuminaires(data.Luminaires.Entities)
-      setIsLuminairesLoading(false)
-    }, 1000)*/
-  //}
-
-
 
   const activeLumSet = (lumBrand) => {
     let lum = _.cloneDeep(luminaires.find(lum => lum.Brand === lumBrand)) || {}
@@ -58,9 +36,6 @@ const LuminaireList = () => {
       for (const key in luminaireToUpdate) {
         if (luminaireToUpdate.hasOwnProperty(key)) {
           if (typeof luminaireToUpdate[key] === 'object' && activeLum[key] !== null) {
-            /*if (!checkPropDifferences(luminaireToUpdate[key], activeLum[key])) {
-              return false
-            }*/
             stack.push({ luminaireToUpdate: luminaireToUpdate[key], activeLum: activeLum[key] })
           } else if (luminaireToUpdate[key] !== activeLum[key]) {
             return false
@@ -83,28 +58,24 @@ const LuminaireList = () => {
     } else {
       console.log("Failed to find the luminaire in the array.")
     }
-    /*luminaireService.updateLuminare(activeLum,
-      updatedLuminaire => {
-        const luminaireIndex = updatedLuminaires.findIndex((lum) => lum.Id === updatedLuminaire.Id)
-        if (luminaireIndex !== -1) {
-          updatedLuminaires[luminaireIndex] = updatedLuminaire
-          setLuminaires(updatedLuminaires)
-        } else {
-          console.log("Failed to find the luminaire in the array.")
-        }
-      },
-      error => {
-        console.log("Failed to update luminaire in the database:", error)
-      })*/
+  }
+
+  const state = () => {
+    return Object.keys(activeLum).length !== 0 ?
+      {
+        id: activeLum.Id,
+        brand: activeLum.Brand,
+        lamp: activeLum.LightSourceInfo.LightSourceType,
+        power: activeLum.LightSourceInfo.Power
+      } :
+      {}
   }
 
   return (
     <>
       {
         isLuminairesLoading ?
-          //<h1>Идёт загрузка...</h1> :
-           <Loader/> :
-          // <h1>Загрузка завершена</h1>
+          <Loader /> :
           <ListGroup>
             {luminaires.map(l => {
               let rootClasses = ['d-flex', 'justify-content-between']
@@ -115,7 +86,7 @@ const LuminaireList = () => {
               return <ListGroup.Item
                 className={rootClasses.join(' ')}
                 key={l.Id}>
-                <Luminaire brand={l.Brand} setShow={setShow} activeLum={activeLumSet} />
+                <LuminaireItem brand={l.Brand} setShow={setShow} activeLumSet={activeLumSet} />
               </ListGroup.Item>
             })}
           </ListGroup>
@@ -125,6 +96,7 @@ const LuminaireList = () => {
         <LuminaireDetails show={show} setShow={setShow} luminaire={activeLum}
           setActiveLum={setActiveLum} updateLuminaire={updateLuminaire}
           checkPropDifferences={checkPropDifferences} />}
+      <Link to={'/'} state={state()}>Back</Link>
     </>)
 }
 

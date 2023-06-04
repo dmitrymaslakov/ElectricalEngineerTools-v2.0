@@ -68,5 +68,41 @@ export const luminaireService = {
                 })
         })
         return promise
+    },
+    measureRoom() {
+        const promise = new Promise((resolve, reject) => {
+            window['execAsync'](
+                JSON.stringify({
+                    functionName: 'DetermineRoomDimensions',
+                    invokeAsCommand: false,
+                    functionParams: { args: 'args' }
+                }),
+                resultAsString => {
+                    resolve(JSON.parse(resultAsString).retValue)
+                },
+                resultAsString => {
+                    reject(resultAsString)
+                }
+            )
+        })
+        return promise
+    },
+    calculateIlluminance(roomData) {
+        const promise = new Promise((resolve, reject) => {
+            window['execAsync'](
+                JSON.stringify({
+                    functionName: 'CalculateIlluminance',
+                    invokeAsCommand: false,
+                    functionParams: JSON.stringify(roomData)
+                }),
+                resultAsString => {
+                    //let value = this._b64ToUtf8(JSON.parse(resultAsString).retValue)
+                    resolve(JSON.parse(resultAsString).retValue)
+                },
+                resultAsString => {
+                    reject(JSON.parse(resultAsString))
+                })
+        })
+        return promise
     }
 }
